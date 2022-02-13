@@ -5,5 +5,5 @@ CREATE TABLE categories (
  name VARCHAR(50),
  bags BOOLEAN,
  dresses BOOLEAN,
- shoes BOOLEAN,
+ shoes BOOLEAN
 );
