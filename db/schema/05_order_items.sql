@@ -4,4 +4,5 @@ CREATE TABLE order_items (
 id SERIAL PRIMARY KEY NOT NULL,
 product_id INTEGER REFERENCES products(id) ON DELETE CASCADE,
 order_id INTEGER REFERENCES orders(id) ON DELETE CASCADE,
+product_total SMALLINT NOT NULL
 );

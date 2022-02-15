@@ -8,8 +8,8 @@ CREATE TABLE users (
  password VARCHAR(50),
  phone_number VARCHAR(50),
  country VARCHAR(50),
-province VARCHAR(50),
-city VARCHAR(50),
-street VARCHAR(50),
-postal VARCHAR(50)
+ province VARCHAR(50),
+ city VARCHAR(50),
+ street VARCHAR(50),
+ postal VARCHAR(50)
 );
