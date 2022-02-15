@@ -6,5 +6,5 @@ CREATE TABLE categories (
  bags BOOLEAN,
  clothing BOOLEAN,
  shoes BOOLEAN,
-accessories BOOLEAN,
+ accessories BOOLEAN
 );

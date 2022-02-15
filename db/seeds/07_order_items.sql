@@ -1,4 +1,4 @@
-INSERT INTO (id,product_id,order_id)
+INSERT INTO order_items(id, product_id, order_id)
 VALUES (1,1,1), 
 (2,2,1),
 (3,2,2),
