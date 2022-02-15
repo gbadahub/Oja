@@ -8,10 +8,10 @@ VALUES (19,"Rockstud Caged 100 Leather Valentino Pumps", "500", "Oja/public/img/
 - Smooth Leather Sole
 - 4.3In Heel
 MADE IN ITALY", true, 2, 2),
-(20,"Black Leaopard", "400", "Oja/public/img/bags/shoes/saint-laurent-leopard-black-ysl-logo-opyum-opium-110-brown-sandal-stiletto-heel-pumps.jpg","
+(20,"Black Leopard YSL Heels", "400", "Oja/public/img/bags/shoes/saint-laurent-leopard-black-ysl-logo-opyum-opium-110-brown-sandal-stiletto-heel-pumps.jpg","
 - US 9.5
 Brand: Yves Saint Laurent
-Size: 39.5 (know your YSL size) 
+Size: 9.5 (know your YSL size) 
 Name: Opyum
 Color: Brown / Black (Manto Naturale)
 Style: Classic Sandal
