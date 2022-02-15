@@ -5,4 +5,6 @@ VALUES
 (2,"Zainab", "Bokhari", "Zainab@email.com","1234", 555-555-5552,"Canada","Onatrio", "Toronto", "Fake St", "M1F 6H0"),
 (3,"Rofiat","Olusanya","rofiat@email.com","4567",555-555-5553, "Canada", "Ontario","Toronto", "Seseame St", "W4W 3R3"),
 (4,"Mary J","Blige","mary@email.com","123abc",555-555-5554, "America", "New York","Yonkers", "Soul St", "NY 1033"),
-(5,"Jane","Doe","jane@email.com","jane123",555-555-5554, "America", "California","oakland", "False St", "CA 2033");
+(5,"Jane","Doe","jane@email.com","jane123",555-555-5554, "America", "California","oakland", "False St", "CA 2033"),
+(6, "Lilly", "Singh", "lillypad@singh.com", "password", 555-555-5556,"Canada", "Ontario", "Brampton", "Captain St", "K4L 5L5" ),
+(7, "Wanda", "Maximoff", "wanda@email.com", "wanadalovesvision",555-555-5557, "Sokovia", "Costel", "Oeznik", "Zrinka St", "HY DRA" );
