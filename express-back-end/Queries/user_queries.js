@@ -39,6 +39,9 @@ const getCheckoutPage =
 //   WHERE id = $1
 // `;
 
+const getEverythingFromUsers =
+`SELECT * FROM users;`;
+
 const getProductsItems =
 `SELECT * FROM products;`;
 
@@ -71,14 +74,14 @@ function getLastNameFromUserId(db, users) {
     })
 };
 
-function getOrdersFromUser(db, userId) {
+function getOrdersFromUserRegistered(db, userId) {
   return db.query(getOrdersFromUser, [userId])
     .then(orderData => {
       return orderData.rows;
     });
 };
 
-function getCheckoutPage(db, userId) {
+function goToCheckoutPage(db, userId) {
   return db.query(getCheckoutPage, [userId])
     .then(orders => {
       return orders.rows;
@@ -91,7 +94,7 @@ function getCheckoutPage(db, userId) {
 //   })
 // };
 
-function getProductsItems(db) {
+function goToProductsItems(db) {
   return db.query(getProductsItems)
     .then(products => {
       return products.rows
@@ -103,7 +106,7 @@ module.exports = {
   getUserIdFromName,
   getFirstNameFromUserId,
   getLastNameFromUserId,
-  getOrdersFromUser,
-  getProductsItems,
-  getCheckoutPage
+  getOrdersFromUserRegistered,
+  goToProductsItems,
+  goToCheckoutPage
 }

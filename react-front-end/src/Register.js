@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import React, { useState } from "react"; 
+import axios from 'axios';
 
 function Resgister() {
   const [formDetails, setFormDetails] = useState({
@@ -12,24 +13,29 @@ function Resgister() {
     const name = e.target.name;
     const value = e.target.value;
     setFormDetails({ ...formDetails, [name]: value });
-    console.log("form", formDetails)
+   
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log("Default form submission prevented");
+  
+    
     if (
       formDetails.firstname &&
       formDetails.lastname &&
       formDetails.email &&
       formDetails.password
     ) {
-      // do you form submission logic here....
-      // at this point, your form values are already set in your state and you can call the values from your state using "formDetails" and the "dot" notation....
-      //axios.post{"/register", {formDetails}}
-      //.then(response => {
-          
-      //} )  
+      
+      axios.post("http://localhost:8080/api/v1/users/register", {formDetails
+      })
+      .then(response =>{
+        console.log(response)
+      })
+      .catch(error =>{
+        console.log(error)
+      })
     }
   };
 

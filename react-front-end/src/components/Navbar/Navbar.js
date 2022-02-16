@@ -9,7 +9,7 @@ function Navbar() {
       <ul>
         {Menuitems.map((item, index) => {
           return (
-            <li>
+            <li key={index}>
               <a className={item.cName} href={item.url}>
                 {item.title}
               </a>
