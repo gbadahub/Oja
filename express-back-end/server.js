@@ -8,6 +8,10 @@ App.use(BodyParser.urlencoded({ extended: false }));
 App.use(BodyParser.json());
 App.use(Express.static('public'));
 
+
+app.use('/register', require('./routes/register'));
+app.use('/auth', require('./routes/auth'));
+
 // Sample GET route
 App.get('/api/data', (req, res) => res.json({
   message: "Seems to work!",
