@@ -1,7 +1,7 @@
 import React from 'react';
 import './App.css';
 import Navbar from './components/Navbar/Navbar';
-import Register from './Register';
+import Register from './components/Register';
 import {Route, Link, Routes} from "react-router-dom";
 
 
