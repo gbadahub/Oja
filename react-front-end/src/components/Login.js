@@ -1,106 +1,67 @@
-import React from 'react';
-import {useRef, useState, useEffect, useContext} from 'react';
-import AuthContext from "./Context/AuthProvider";
-import axios from './api/axios';
-const LOGIN_URL = 'Oja/express-back-end/routes/auth';
+import React, { useState } from "react";
+import axios from "axios";
 
-const Login = () => {
-  const {setAuth} = useContext(AuthContext);
-  const userRef = useRef (); 
-  const errRef = useRef();
+function Login() {
 
-  const [user, setUser] = useState('');
-  const [pwd, setPwd] = useState('');
-  const [errMsg, setErrMsg] = useState('');
-  const [success, setSuccess] = useState(false);
+  const [formDetails, setFormDetails] = useState({
+    email: "",
+    password: "",
+    
+  });
 
-  // set focus on first input when the component loads
-  useEffect(() => {
-   useRef.current.focus();  
-  }, [])
-  
-  // empty out any error msg when user changes user and pwds
-  useEffect(() => {
-    setErrMsg('');
-  }, [user, pwd])
+  const handleChange = (e) => {
+    const name = e.target.name;
+    const value = e.target.value;
+    setFormDetails({ ...formDetails, [name]: value });
+  };
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
-    try {
-      const response = await axios.post(LOGIN_URL,
-          JSON.stringify({user, pwd}), {
-          headers: {'Content-Type': 'application/json'}, 
-          withCredentials: true
-        }
-      );
-      console.log(JSON.stringify(response?.data));
-      // console.log(JSON.stringify(response));
-      const accessToken = response?.data?.accessToken;
-      const roles = response?.data?.roles;
-      setAuth({user, pwd, roles, accessToken});  
-      setUser('');
-      setPwd('');
-      setSuccess(true);
-    } catch (err) {
-      if(!err?.response) {
-        setErrMsg('No Server Response');
-      } else if (err.response?.status === 400) {
-        setErrMsg('Missing Username or Password');
-      } else if (err.response?.status === 401) {
-        setErrMsg('UnAuthorized');
-      } else {
-        setErrMsg('Login Failed');
-      }
-      errRef.current.focus();
+    console.log("Default form submission prevented");
+
+    if (
+      formDetails.email &&
+      formDetails.password
+    ) {
+      
+      axios.post("/login", {formDetails
+      })
+      .then(response =>{
+        console.log(response)
+      })
+      .catch(error =>{
+        console.log(error)
+      })
     }
-  
-  }
+  };
 
   return (
-    <> 
-      {success ? (
-        <section>
-          <h1>You are logged in!</h1>
-          <br/>
-          <p>
-            <a href='#'>Go to Home</a>
-          </p>
-        </section>
-      ) : (
-          <section>
-            <p ref={errRef} className={errMsg ? "errMsg" : "offscreen"} aria-live="assertive">{errMsg}</p>
-            <h1>Sign In</h1>
-            <form onSubmit={handleSubmit}>
-              <label htmlFor='username'>Username:</label>
-              <input 
-              type='text' 
-              id='username'
-              ref={userRef}
-              autoComplete='off'
-              onChange={(e) => setUser(e.target.value)}
-              value={user}
-              required
-              />
-              <label htmlFor='password'>Password:</label>
-              <input 
-              type='password' 
-              id='password'
-              onChange={(e) => setPwd(e.target.value)}
-              value={pwd}
-              required
-              />
-              <button>Sign In</button>
-            </form>
-            <p>
-              Need an Account? <br/>
-              <span className='line'>{/* put react router link here*/}</span>
-              <a href='#'>Sign Up</a>
-            </p>
-          </section>
-          )
-        }
+    <>
+      <h1 className="register-title"> Log Into Your Account!</h1>
+      <form onSubmit={handleSubmit} className="register-page">
+        <input
+          type="email"
+          name="email"
+          placeholder="Email"
+          autoComplete="off"
+          value={formDetails.email}
+          onChange={handleChange}
+          className="input"
+        />
+        <input
+          type="password"
+          name="password"
+          placeholder="Password"
+          autoComplete="off"
+          value={formDetails.password}
+          onChange={handleChange}
+          className="input"
+        />
+       
+        <button type="submit" className="register-button" > Log In</button>
+      </form>
     </>
-  )
+  );
 }
 
-export default Login 
+export default Login;

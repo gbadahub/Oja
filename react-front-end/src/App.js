@@ -1,24 +1,25 @@
-import React from 'react';
-import './App.css';
-import Navbar from './components/Navbar/Navbar';
-import Register from './components/Register';
-import {Route, Link, Routes} from "react-router-dom";
-import ImageSlider from "./components/Slider/ImageSlider"
-import { SlideData } from './components/Slider/SliderData';
+import React from "react";
+import "./App.css";
+import Navbar from "./components/Navbar/Navbar";
+import Register from "./components/Register";
+import Login from "./components/Login";
+import Home from "./components/Home";
+import { Route, Link, Routes } from "react-router-dom";
 
 
 function App() {
   return (
     <main className="App">
-      <Navbar/>
-    {/* <ImageSlider slides={SlideData}/> */}
-       <Routes>
-      <Route path="/register" element={<Register/>}>
-      </Route>
-      </Routes> 
-     
-    
-      
+      <Navbar />
+      <Routes>
+        <Route path="/register" element={<Register />}></Route>
+      </Routes>
+      <Routes>
+        <Route path="/login" element={<Login />}></Route>
+      </Routes>
+      <Routes>
+        <Route path="/home" element={<Home />}></Route>
+      </Routes>
     </main>
   );
 }

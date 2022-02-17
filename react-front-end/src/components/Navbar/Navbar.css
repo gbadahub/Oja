@@ -7,6 +7,9 @@
   padding-left: 1em;
   padding-top:.5em ;
   padding-bottom: .5em;
+  position: sticky; /* Sticky/fixed navbar */
+  top: 0;
+  z-index: 20;
 }
 
 .nav-div-top{
@@ -31,7 +34,7 @@
 
 .nav-items{
   display: grid;
-  grid-template-columns: repeat(4, 4em);
+  grid-template-columns: repeat(5, 4em);
   grid-gap: 1px;
   list-style: none;
   color: white;
@@ -64,4 +67,51 @@
   color: white;
 }
 
+.slider {
+  position: relative;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.image {
+  width: 1065px;
+  height: 570px;
+  border-radius: 10px;
+  object-fit: cover;
+}
+
+.right-arrow {
+  position: absolute;
+  top: 50%;
+  right: 32px;
+  font-size: 3rem;
+  color: #000;
+  z-index: 10;
+  cursor: pointer;
+  user-select: none;
+}
+
+.left-arrow {
+  position: absolute;
+  top: 50%;
+  left: 32px;
+  font-size: 3rem;
+  color: #000;
+  z-index: 10;
+  cursor: pointer;
+  user-select: none;
+}
+
+.slide {
+  opacity: 0;
+  transition-duration: 1s ease;
+}
+
+.slide.active {
+  opacity: 1;
+  transition-duration: 1s;
+  transform: scale(1.08);
+}
 
