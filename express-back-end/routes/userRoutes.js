@@ -1,6 +1,7 @@
 const bcrypt = require('bcrypt'); 
 
 module.exports = function(router, database)  {
+  
 
   // create a new user in registration page
   router.post('/register', (req, res) => {
@@ -9,13 +10,13 @@ module.exports = function(router, database)  {
     database.addUser(user)
     .then(user => {
       if (!user) {
-        res.send({error: "error"});
+        res.json({error: "error"});
         return;
       }
       req.session.userId = user.id;
-      res.send("🤗");
+      res.json("🤗");
     })
-    .catch(e => res.send(e));
+    .catch(e => res.json(e));
   });
   
     /**
@@ -39,13 +40,13 @@ module.exports = function(router, database)  {
     login(email, password)
       .then(user => {
         if (!user) {
-          res.send({error: "error"});
+          res.json({error: "error"});
           return;
         }
         req.session.userId = user.id;
-        res.send({user: {name: user.first_name, email: user.email, id: user.id}});
+        res.json({user: {name: user.first_name, email: user.email, id: user.id}});
       })
-      .catch(e => res.send(e));
+      .catch(e => res.json(e));
   });
   
   router.post('/logout', (req, res) => {

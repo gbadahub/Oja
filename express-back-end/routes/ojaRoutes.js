@@ -4,49 +4,50 @@ module.exports = function(router, database) {
   // get all products 
   router.get('/homepage', (req, res) => {
     database.getAllProductsForHomepage(20)
-    .then(products => res.send({products}))
+    .then(products => res.json({products}))
     .catch(e => {
       console.error(e);
-      res.send(e)
+      res.json(e)
     }); 
   });
 
   // get all clothing 
   router.get('/clothing', (req, res) => {
     database.getAllProductsFromClothing(20)
-    .then(products => res.send({products}))
+    .then(products => res.json({products}))
     .catch(e => {
       console.error(e);
-      res.send(e)
+      res.json(e)
     }); 
   });
 
   // get all shoes
     router.get('/shoes', (req, res) => {
     database.getAllProductsFromShoes(20)
-    .then(products => res.send({products}))
+    .then(products => res.json({products}))
     .catch(e => {
       console.error(e);
-      res.send(e)
+      res.json(e)
     }); 
   });
 
   // get all accessories 
     router.get('/accessories', (req, res) => {
     database.getAllProductsFromAccessories(20)
-    .then(products => res.send({products}))
+    .then(products => res.json({products}))
     .catch(e => {
       console.error(e);
-      res.send(e)
+      res.json(e)
     }); 
   });
+
   // get all bags
     router.get('/bags', (req, res) => {
     database.getAllProductsFromBags(20)
-    .then(products => res.send({products}))
+    .then(products => res.json({products}))
     .catch(e => {
       console.error(e);
-      res.send(e)
+      res.json(e)
     }); 
   });
 
@@ -54,14 +55,14 @@ module.exports = function(router, database) {
   router.get('/orderSummary', (req, res) => {
     const userId = req.session.userId;
     if (!userId) {
-      res.error("💩");
+      res.json({err: "💩"});
       return;
     }
     database.getCheckoutPage(userId)
-    .then(orders => res.send({orders}))
+    .then(orders => res.json({orders}))
     .catch(e => {
       console.error(e);
-      res.send(e)
+      res.json(e)
     });
   });
 
@@ -69,16 +70,16 @@ module.exports = function(router, database) {
   // AM I GETTING THE RIGHT CART INFORMATION uing orderID?????
   router.get('/cart', (req, res) => {
     const userId = req.session.userId;
-    const userId = req.session.orderId;
+    const orderId = req.session.orderId;
     if (!userId) {
       res.error("💩");
       return;
     }
     database.getCartInfoForUser(userId, orderId)
-    .then(orders => res.send({orders}))
+    .then(orders => res.json({orders}))
     .catch(e => {
       console.error(e);
-      res.send(e)
+      res.json(e)
     });
   });
 
@@ -91,25 +92,39 @@ module.exports = function(router, database) {
     const userId = req.session.userId;
     database.appendOrdersTableWithUserId({...req.body, owner_id: userId})
       .then(orders => {
-        res.send(orders);
+        res.json(orders)
+        const params = JSON.stringify({owner_id: userId})
+        res.redirect('/cart_two/?', params);
+
       })
       .catch(e => {
         console.error(e);
-        res.send(e)
+        res.json(e)
       });
   });
 
+//   app.get('/category', function(req, res) {
+//     const query = querystring.stringify({
+//         "a": 1,
+//         "b": 2,
+//         "valid":"your string here"
+//     });
+//     res.redirect('/?' + query);
+// });
+
+
   // post items to orders logged in only
-  router.post('/cart', (req, res) => {
-    const userId = req.session.userId;
-    database.appendOrdersItemsTableWithCurrentOrder({...req.body, owner_id: userId})
-      .then(orders => {
-        res.send(orders);
-      })
-      .catch(e => {
-        console.error(e);
-        res.send(e)
-      });
+  router.post('/cart_two/:id', (req, res) => {
+    console.log(req.params);
+    // const userId = req.session.userId;
+    // database.appendOrdersItemsTableWithCurrentOrder({...req.body, owner_id: userId})
+    //   .then(orders => {
+    //     res.send(orders);
+    //   })
+    //   .catch(e => {
+    //     console.error(e);
+    //     res.send(e)
+    //   });
   }); 
 
   // do I need to make a seperate route for search bar results?
