@@ -1,7 +1,6 @@
 import React, { Component, useState } from "react";
-import { Menuitems } from "./Menuitems";
-import { Navitems } from "./Navitems";
 import "./Navbar.css";
+import { Link } from 'react-router-dom'
 
 
 function Navbar() {
@@ -12,28 +11,21 @@ function Navbar() {
 
       
       <ul className="nav-items">
-        {Navitems.map((item, index) => {
-          return (
-            <li key={index}>
-              <a className={item.cName} href={item.url}>
-                {item.title}
-              </a>
-            </li>
-          );
-        })}
+        <li>Search</li>
+        <li>Log In</li>
+        <li > <Link to="/register">Register</Link></li>
+        <li>Cart</li>
       </ul>
       </div>
 
       <ul className="nav-menu">
-        {Menuitems.map((item, index) => {
-          return (
-            <li key={index}>
-              <a className={item.cName} href={item.url}>
-                {item.title}
-              </a>
-            </li>
-          );
-        })}
+      <li>Bags</li>
+      <li>Clothing</li>
+      <li>Shoes</li>
+      <li>Accessories</li>
+      <li>Rent</li>
+      
+
       </ul>
       
     </nav>

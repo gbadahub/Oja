@@ -1,6 +1,7 @@
 import React, { useState } from "react"; 
 import axios from 'axios';
 
+
 function Register() {
   const [formDetails, setFormDetails] = useState({
     firstname: "",
@@ -39,6 +40,7 @@ function Register() {
     }
   };
 
+  
   return (
     <>
       <form onSubmit={handleSubmit}>
