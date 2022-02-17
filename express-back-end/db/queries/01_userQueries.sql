@@ -33,7 +33,8 @@ INSERT INTO orders (user_id)
 RETURNING id;
 
  -- items per order --
- SELECT products.name AS name, order_items.order_id AS order_id from order_items
+ SELECT products.name AS name, products.price AS price, (orders.total_price_cents*100) AS cartTotal,
+ orders.created_at AS placed_at, order_items.order_id AS order_id from order_items
   JOIN products ON order_items.product_id = products.id
   GROUP BY order_items.order_id, products.name
   ORDER BY order_items.order_id;
@@ -48,12 +49,12 @@ UPDATE orders
 WHERE  id = 6;
 
 -- checkout page *** UNSURE WITH THE QUERY WITHOUT PRICE 
-SELECT order_id, total_price as total,
-menu_items.item_name as item, menu_items.item_price as unit_price, menu_items.image, users.name as customer
+SELECT order_id, total_price_cents as total,
+products.name as item, products.product_total as unit_price, products.img, users.first_name as customer
 FROM order_items
 JOIN orders ON orders.id = order_id
-JOIN menu_items ON menu_items.id = order_items.menu_item_id
-JOIN users ON users.id = 3;
+JOIN products ON products.id = order_items.products_id
+JOIN users ON users.id = $1;
 
 
 -- query to add to products table -- 
