@@ -39,9 +39,6 @@ const getCheckoutPage =
 //   WHERE id = $1
 // `;
 
-const getEverythingFromUsers =
-`SELECT * FROM users;`;
-
 const getProductsItems =
 `SELECT * FROM products;`;
 

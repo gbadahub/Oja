@@ -7,6 +7,12 @@ function Resgister() {
     lastname: "",
     email: "",
     password: "",
+    phoneNumber: "",
+    country: "",
+    province: "",
+    city: "",
+    street: "",
+    postal: ""
   });
 
   const handleChange = (e) => {
@@ -28,7 +34,7 @@ function Resgister() {
       formDetails.password
     ) {
       
-      axios.post("http://localhost:8080/api/v1/users/register", {formDetails
+      axios.post("http://localhost:8080/api/v1/users/register/", {formDetails
       })
       .then(response =>{
         console.log(response)
@@ -72,6 +78,54 @@ function Resgister() {
           placeholder="Password"
           autoComplete="off"
           value={formDetails.password}
+          onChange={handleChange}
+        />
+        <input
+          type="number"
+          name="phoneNumber"
+          placeholder="Phone number"
+          autoComplete="off"
+          value={formDetails.phoneNumber}
+          onChange={handleChange}
+        />
+        <input
+          type="text"
+          name="country"
+          placeholder="Country"
+          autoComplete="off"
+          value={formDetails.country}
+          onChange={handleChange}
+        />
+        <input
+          type="text"
+          name="province"
+          placeholder="Province"
+          autoComplete="off"
+          value={formDetails.province}
+          onChange={handleChange}
+        />
+        <input
+          type="text"
+          name="city"
+          placeholder="City"
+          autoComplete="off"
+          value={formDetails.city}
+          onChange={handleChange}
+        />
+        <input
+          type="text"
+          name="street"
+          placeholder="Street Name"
+          autoComplete="off"
+          value={formDetails.street}
+          onChange={handleChange}
+        />
+        <input
+          type="text"
+          name="postal"
+          placeholder="Postal Code"
+          autoComplete="off"
+          value={formDetails.postal}
           onChange={handleChange}
         />
         <button type="submit">Submit</button>

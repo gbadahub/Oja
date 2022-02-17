@@ -20,7 +20,7 @@ const handleNewUser = async (req, res) => {
     const newUser = {'username': user, "password": hashedPwd};
     usersDB.setUsers([...usersDB.users, newUser])
     await fsPromises.writeFile(
-      path.join(controllers, '..','seeds', 'model', 'users.json') // need to change how to get to db
+      path.join(controllers, '..','seeds', 'model', 'users.json'), // need to change how to get to db
       JSON.stringify(usersDB.users)
     ); 
     console.log(usersDB.users);

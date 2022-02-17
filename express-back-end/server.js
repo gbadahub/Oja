@@ -20,8 +20,8 @@ userRouter(router, userQueries)
 App.use("/api/v1/users", router)
 
 
-app.use('/register', require('./routes/register'));
-app.use('/auth', require('./routes/auth'));
+// App.use('/register', require('./routes/register'));
+// App.use('/auth', require('./routes/auth'));
 
 // Sample GET route
 App.get('/api/data', (req, res) => res.json({
@@ -29,13 +29,14 @@ App.get('/api/data', (req, res) => res.json({
 }));
 
 
-// App.post("/register", (req, res)=>{
-//   console.log("paylo", req.body)
-//   const abc = {
-//     name: "xyz",
-//   };
-//   res.json(abc);
-// })
+
+App.post("/register", (req, res)=>{
+  console.log("paylo", req.body)
+  const abc = {
+    name: "xyz",
+  };
+  res.json(abc);
+})
 
 // // registration page 
 // App.post("/register", (req , res) => {
