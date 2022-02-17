@@ -12,11 +12,8 @@
   "dependencies": {
     "bcrypt": "^5.0.1",
     "body-parser": "^1.18.3",
-<<<<<<< HEAD
-    "cors": "^2.8.5",
-=======
     "cookie-session": "^2.0.0",
->>>>>>> LoginAuthorization_Zainab
+    "cors": "^2.8.5",
     "express": "^4.16.4",
     "nodemon": "^1.18.7",
     "pg": "^8.7.3"
