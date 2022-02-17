@@ -1,7 +1,7 @@
 import React, { useState } from "react"; 
 import axios from 'axios';
 
-function Resgister() {
+function Register() {
   const [formDetails, setFormDetails] = useState({
     firstname: "",
     lastname: "",
@@ -80,4 +80,4 @@ function Resgister() {
   );
 }
 
-export default Resgister;
+export default Register;

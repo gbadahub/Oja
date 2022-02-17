@@ -1,0 +1,38 @@
+.NavbarItems{
+  background: black;
+  height: 4em;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding-left: 1em;
+  padding-top:.5em ;
+  padding-bottom: .5em;
+}
+
+.nav-div-top{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.navbar-logo{
+  color: gold;
+  font-size: 1.5em;
+}
+
+
+.nav-menu{
+  display: grid;
+  grid-template-columns: repeat(5, auto);
+  grid-gap: 10px;
+  list-style: none;
+}
+
+.nav-items{
+  display: grid;
+  grid-template-columns: repeat(4, 4em);
+  grid-gap: 1px;
+  list-style: none;
+  color: white;
+}
+
