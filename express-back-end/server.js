@@ -1,50 +1,53 @@
+{createConnection} = require('./createDBConnection');
+const db_oja = createConnection();
+const createUserLoginRoutes = require('./routes/userRoutes');
+const createOjaRoutes = require('./routes/ojaRoutes');
+
 const Express = require('express');
-const App = Express();
 const BodyParser = require('body-parser');
-const { application } = require('express');
-const PORT = 8080; 
 const router = Express.Router();
-const db = require("./db")
-const userRouter = require ("./routes/users")
-const userQueries = require("./Queries/user_queries")
+
+
 const cors = require("cors")
+const cookieSession = require('cookie-session');
+
+const App = Express();
+
+// require the db and connection creation function 
+// create connection with db 
+// pass connection into routes file 
+
+// did I get cookie-session properly?
+App.use(cookieSession({
+  name: 'session',
+  keys: ['key1']
+}));
 
 
 // Express Configuration
 App.use(BodyParser.urlencoded({ extended: false }));
 App.use(BodyParser.json());
-App.use(Express.static('public'));
+
 App.use(cors())
+App.use(Express.static('public'));
 
-userRouter(router, userQueries)
-App.use("/api/v1/users", router)
-
-
-app.use('/register', require('./routes/register'));
-app.use('/auth', require('./routes/auth'));
-
-// Sample GET route
-App.get('/api/data', (req, res) => res.json({
-  message: "Seems to work!",
-}));
+// oja endpoints 
+const ojaRouter = express.router();
+createOjaRoutes(ojaRouter, db_oja);
+app.user('/api' ojaRouter);
 
 
-// App.post("/register", (req, res)=>{
-//   console.log("paylo", req.body)
-//   const abc = {
-//     name: "xyz",
-//   };
-//   res.json(abc);
-// })
+// /user/endpoints
+const userRouter = express.Router();
+createUserLoginRoutes(userRouter, database);
+app.use('/user', userRouter);
 
-// // registration page 
-// App.post("/register", (req , res) => {
-//   if (user){
-//     return res.status(400).json({"User":" This user exists"})
-//   }
-  
 
-// })
+app.get("/test", (req, res) => {
+  res.send("🤗");
+});
+
+const PORT = 8080;
 
 App.listen(PORT, () => {
   // eslint-disable-next-line no-console

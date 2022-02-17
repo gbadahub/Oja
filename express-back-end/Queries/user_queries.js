@@ -2,7 +2,11 @@ const getIdFromUsers = `SELECT id FROM users WHERE name = $1;`;
 
 const getFirstNameFromUsers = `SELECT first_name FROM users WHERE id = $1;`;
 
-const getLastNameFromUsers = `SELECT last_name FROM users WHERE id = $1`;
+const getLastNameFromUsers = `SELECT last_name FROM users WHERE id = $1;`;
+
+
+const getUsersByEmail = `SELECT * FROM users WHERE email = $1 LIMIT 1;`;
+
 
 const getOrdersFromUser =
 `SELECT * FROM orders
@@ -39,11 +43,8 @@ const getCheckoutPage =
 //   WHERE id = $1
 // `;
 
-const getEverythingFromUsers =
-`SELECT * FROM users;`;
-
 const getProductsItems =
-`SELECT * FROM products;`;
+`SELECT * FROM products where user_id = $1;`;
 
 function apendOrdersTableWithCurrentOrderReturningOrderId(db, products) {
   return db.query(apendOrderItemsTableWithCurrentOrder, products);
@@ -55,6 +56,13 @@ function apendOrdersTableWithCurrentOrderReturningOrderId(db, products) {
 
 function getUserIdFromName(db, userName) {
   return db.query(getIdFromUsers, [userName])
+    .then((data) => {
+      return data.rows[0].id;
+    });
+};
+
+function getUserFromUserEmail(db, email) {
+  return db.query(getUserFromEmail, [email])
     .then((data) => {
       return data.rows[0].id;
     });
@@ -74,14 +82,14 @@ function getLastNameFromUserId(db, users) {
     })
 };
 
-function getOrdersFromUserRegistered(db, userId) {
+function getOrdersFromUser(db, userId) {
   return db.query(getOrdersFromUser, [userId])
     .then(orderData => {
       return orderData.rows;
     });
 };
 
-function goToCheckoutPage(db, userId) {
+function getCheckoutPage(db, userId) {
   return db.query(getCheckoutPage, [userId])
     .then(orders => {
       return orders.rows;
@@ -94,7 +102,7 @@ function goToCheckoutPage(db, userId) {
 //   })
 // };
 
-function goToProductsItems(db) {
+function getProductsItems(db) {
   return db.query(getProductsItems)
     .then(products => {
       return products.rows
@@ -106,7 +114,8 @@ module.exports = {
   getUserIdFromName,
   getFirstNameFromUserId,
   getLastNameFromUserId,
-  getOrdersFromUserRegistered,
-  goToProductsItems,
-  goToCheckoutPage
+  getOrdersFromUser,
+  getProductsItems,
+  getCheckoutPage,
+  getUserFromUserEmail
 }

@@ -7,8 +7,7 @@ import ImageSlider from "./components/Slider/ImageSlider"
 import { SlideData } from './components/Slider/SliderData';
 
 
-function App(){
-
+function App() {
   return (
     <main className="App">
       <Navbar/>

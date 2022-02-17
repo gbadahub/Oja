@@ -1,8 +1,8 @@
 import React from 'react';
 import {useRef, useState, useEffect, useContext} from 'react';
-import AuthContext from "../Context/AuthProvider";
-import axios from '../api/axios';
-const LOGIN_URL = '/auth';
+import AuthContext from "./Context/AuthProvider";
+import axios from './api/axios';
+const LOGIN_URL = 'Oja/express-back-end/routes/auth';
 
 const Login = () => {
   const {setAuth} = useContext(AuthContext);

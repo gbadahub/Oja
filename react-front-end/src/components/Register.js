@@ -7,6 +7,12 @@ function Register() {
     lastname: "",
     email: "",
     password: "",
+    phoneNumber: "",
+    country: "",
+    province: "",
+    city: "",
+    street: "",
+    postal: ""
   });
 
   const handleChange = (e) => {
@@ -25,14 +31,15 @@ function Register() {
       formDetails.email &&
       formDetails.password
     ) {
-      axios
-        .post("http://localhost:8080/api/v1/users/register", { formDetails })
-        .then((response) => {
-          console.log(response);
-        })
-        .catch((error) => {
-          console.log(error);
-        });
+      
+      axios.post("http://localhost:8080/api/v1/users/register/", {formDetails
+      })
+      .then(response =>{
+        console.log(response)
+      })
+      .catch(error =>{
+        console.log(error)
+      })
     }
   };
 
@@ -76,9 +83,61 @@ function Register() {
           onChange={handleChange}
           className="input"
         />
-        <button type="submit" className="register-button">
-          Submit
-        </button>
+        <input
+          type="number"
+          name="phoneNumber"
+          placeholder="Phone number"
+          autoComplete="off"
+          value={formDetails.phoneNumber}
+          onChange={handleChange}
+          className="input"
+        />
+        <input
+          type="text"
+          name="country"
+          placeholder="Country"
+          autoComplete="off"
+          value={formDetails.country}
+          onChange={handleChange}
+          className="input"
+        />
+        <input
+          type="text"
+          name="province"
+          placeholder="Province"
+          autoComplete="off"
+          value={formDetails.province}
+          onChange={handleChange}
+          className="input"
+        />
+        <input
+          type="text"
+          name="city"
+          placeholder="City"
+          autoComplete="off"
+          value={formDetails.city}
+          onChange={handleChange}
+          className="input"
+        />
+        <input
+          type="text"
+          name="street"
+          placeholder="Street Name"
+          autoComplete="off"
+          value={formDetails.street}
+          onChange={handleChange}
+          className="input"
+        />
+        <input
+          type="text"
+          name="postal"
+          placeholder="Postal Code"
+          autoComplete="off"
+          value={formDetails.postal}
+          onChange={handleChange}
+          className="input"
+        />
+        <button type="submit" className="register-button" >Submit</button>
       </form>
     </>
   );
