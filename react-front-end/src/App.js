@@ -11,7 +11,7 @@ function App() {
   return (
     <main className="App">
       <Navbar/>
-    <ImageSlider slides={SlideData}/>
+    {/* <ImageSlider slides={SlideData}/> */}
        <Routes>
       <Route path="/register" element={<Register/>}>
       </Route>
