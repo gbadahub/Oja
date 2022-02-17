@@ -7,8 +7,10 @@
     "@fortawesome/free-solid-svg-icons": "^6.0.0",
     "@fortawesome/react-fontawesome": "^0.1.17",
     "axios": "^0.18.1",
-    "react": "^16.8.6",
+    "icons": "^1.0.0",
+    "react": "^16.14.0",
     "react-dom": "^16.8.6",
+    "react-icons": "^4.3.1",
     "react-router-dom": "^6.2.1",
     "react-scripts": "2.1.8"
   },

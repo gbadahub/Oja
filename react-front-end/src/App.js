@@ -1,15 +1,23 @@
 import React from 'react';
 import './App.css';
 import Navbar from './components/Navbar/Navbar';
-import Register from './Register';
-import {Routes, Link} from "react-router-dom";
+import Register from './components/Register';
+import {Route, Link, Routes} from "react-router-dom";
+import ImageSlider from "./components/Slider/ImageSlider"
+import { SlideData } from './components/Slider/SliderData';
 
 
 function App() {
   return (
     <main className="App">
       <Navbar/>
-      <Routes exact path to="/register" component={Register}/>
+    <ImageSlider slides={SlideData}/>
+       <Routes>
+      <Route path="/register" element={<Register/>}>
+      </Route>
+      </Routes> 
+     
+    
       
     </main>
   );

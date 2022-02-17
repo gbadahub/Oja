@@ -26,6 +26,7 @@
   grid-template-columns: repeat(5, auto);
   grid-gap: 10px;
   list-style: none;
+  color: white;
 }
 
 .nav-items{
@@ -35,4 +36,32 @@
   list-style: none;
   color: white;
 }
+
+.register-title{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  background-color: #8d6f57;
+}
+
+.register-page{
+  display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    padding:3em 20em 20em 20em;
+    background-color:#8d6f57 ;
+}
+
+.input{
+  padding: 1em;
+  margin-bottom: 1.5em;
+  border-radius: 7px;
+}
+.register-button{
+  padding: 1em;
+  border-radius: 5px;
+  background-color:black ;
+  color: white;
+}
+
 
