@@ -1,4 +1,4 @@
-{createConnection} = require('./Queries/user_queries.js')
+const {createConnection} = require('./db/index');
 const db_oja_connection = createConnection();
 
 //get all the user info using their email 
@@ -14,7 +14,7 @@ const getUserFromUserEmail = function(email) {
       console.log(err.message);
   });
 }
-exports.getUserWithUserEmail = getUserWithUserEmail;
+exports.getUserFromUserEmail = getUserFromUserEmail;
 
 // get all user info using their id 
 
@@ -75,7 +75,7 @@ exports.appendOrdersTableWithUserId = appendOrdersTableWithUserId;
 
 // add an order_item to order_item table 
 
-const appendOrdersItemsTableWithCurrentOrder = function (orders) {
+const appendOrdersItemsTableWithCurrentOrder = function (order_items) {
   return db_oja_connection
     .query(`INSERT INTO order_items (product_id, order_id, product_total)
   VALUES ($1, $2, $3)
@@ -125,10 +125,14 @@ const getCheckoutPage = function (userId) {
 exports.getCheckoutPage = getCheckoutPage;
 
 // get related products from DB for a specific user up to 10 items
+// how do I not show the current product => *** 
+// NESTED Q ..  ???? COME BACK TO THISS 
 
 const getRelatedProductsFromUser = function (userId) {
   return db_oja_connection
-  .query(`SELECT * FROM products where user_id = $1 LIMIT 10;`, [userId])
+  .query(`SELECT * FROM products WHERE user_id = $1 LIMIT 10;`, [userId])
+  .query( `SELECT * FROM products WHERE user_id = 4;`)
+  .then(res => console.log(res) )
     .then(res => res.rows[0])
     .catch((err) => {
       console.log(err.message);
@@ -147,36 +151,38 @@ const getAllProductsUsingSearchBar = function (options, limit = 20)  {
   let queryString = `SELECT * FROM products JOIN users ON users.id = user_id;`;
 
    //3b user name
-  console.log("user.first_name", options)
+  console.log("users.first_name", options)
   if (options.user_first_name) {
     queryParams.push(`%${options.user_first_name}%`);
-    queryString += `AND user_first_name LIKE $${queryParams.length}`;
+    queryString += `AND users.first_name LIKE $${queryParams}`;
   }
 
-  // 3b get products using categories
-  console.log("category_id", options)
-  if (options.category_id) {
-    queryParams.push(`%${options.category_id}%`);
-    queryString += ` AND category_id LIKE $${queryParams.length}`;
+  // 3b get products using product name
+
+  // figure out howo ot correectly reference products_name to render search 
+  console.log("product_name", options)
+  if (options.product_name) {
+    queryParams.push(`%${options.product_name}%`);
+    queryString += ` AND name LIKE $${queryParams}`;
 
   }
 
    //3c get products using minimum price 
-  if (options..minimum_price_per_night) {
-    queryParams.push(`${options..minimum_price_per_night * 100}`);
-    queryString += ` AND price >= $${queryParams.length}`;
+  if (options.minimum_price_per_night) {
+    queryParams.push(`${options.minimum_price_per_night * 100}`);
+    queryString += ` AND price >= $${queryParams}`;
   }
 
    //3d get products using max price
   if (options.maximum_price_per_night) {
     queryParams.push(`${options.maximum_price_per_night * 100}`);
-    queryString += ` AND price <= $${queryParams.length}`;
+    queryString += ` AND price <= $${queryParams}`;
   }
 
   queryParams.push(limit);
   queryString += `  
     ORDER BY price
-    LIMIT $${queryParams.length};
+    LIMIT $${queryParams};
   `;
 
   console.log(queryString, queryParams);
@@ -267,7 +273,7 @@ const getCartInfoForUser = function (user_id, order_id) {
     });
 }
 exports.getCartInfoForUser = getCartInfoForUser;
-
+// FIX THIS getCartInforForUSER QUERY 
 // need to create function to update total price in orders table 
 
 
@@ -277,3 +283,9 @@ exports.getCartInfoForUser = getCartInfoForUser;
 // and a function that starts a connection to db
 
 //export function 
+
+// SELECT products.name AS name, products.price AS price, (orders.total_price_cents*100) AS cartTotal,
+//  orders.created_at AS placed_at, order_items.order_id AS order_id from order_items
+//   JOIN products ON order_items.product_id = products.id
+//   GROUP BY order_items.order_id, products.name
+//   ORDER BY order_items.order_id;

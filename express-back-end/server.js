@@ -1,17 +1,17 @@
-{createConnection} = require('./createDBConnection');
+const {createConnection} = require('./db/index');
 const db_oja = createConnection();
 const createUserLoginRoutes = require('./routes/userRoutes');
 const createOjaRoutes = require('./routes/ojaRoutes');
 
-const Express = require('express');
+const express = require('express');
 const BodyParser = require('body-parser');
-const router = Express.Router();
+const router = express.Router();
 
 
-const cors = require("cors")
+const cors = require("cors");
 const cookieSession = require('cookie-session');
 
-const App = Express();
+const App = express();
 
 // require the db and connection creation function 
 // create connection with db 
@@ -29,21 +29,21 @@ App.use(BodyParser.urlencoded({ extended: false }));
 App.use(BodyParser.json());
 
 App.use(cors())
-App.use(Express.static('public'));
+App.use(express.static('public'));
 
 // oja endpoints 
-const ojaRouter = express.router();
+const ojaRouter = express.Router();
 createOjaRoutes(ojaRouter, db_oja);
-app.user('/api' ojaRouter);
+App.use('/api', ojaRouter);
 
 
 // /user/endpoints
 const userRouter = express.Router();
-createUserLoginRoutes(userRouter, database);
-app.use('/user', userRouter);
+createUserLoginRoutes(userRouter, db_oja);
+App.use('/user', userRouter);
 
 
-app.get("/test", (req, res) => {
+App.get("/test", (req, res) => {
   res.send("🤗");
 });
 

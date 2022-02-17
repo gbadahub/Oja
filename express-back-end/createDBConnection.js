@@ -1,4 +1,4 @@
-const { Pool, Client } = require('pg/lib');
+const { Client } = require('pg/lib');
 
 //DB
 const createConnection= () => {
@@ -8,10 +8,10 @@ const createConnection= () => {
     user: 'ojaadmin',
     password: 'ojaadmin',
     host: 'localhost', 
-    database: 'Oja',
+    database: 'oja',
     port: 5432
   })
-
+  console.log(process.env)
   client.connect()
   
   client.query('SELECT NOW()', (err, res) => (
@@ -21,4 +21,4 @@ const createConnection= () => {
   return client;
 };
 
-export createConnection;
+exports.createConnection = createConnection;
