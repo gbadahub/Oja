@@ -1,6 +1,10 @@
 require('dotenv').config();
 const Pool = require("pg").Pool;
 
+
+// IS THIS FILE NECESSARY IF DB_CONNECTIONS FILE EXISTS 
+
+
 const client = new Pool({
   user: process.env.PGUSER,
   host: process.env.PGHOST,
