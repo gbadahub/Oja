@@ -30,7 +30,9 @@ function Navbar() {
         <li>Clothing</li>
         <li>Shoes</li>
         <li>Accessories</li>
-        <li>Rent</li>
+        <li>
+        <Link to="/rent"> Rent </Link>
+        </li>
       </ul>
     </nav>
   );
