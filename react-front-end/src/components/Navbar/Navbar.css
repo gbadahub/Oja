@@ -34,6 +34,8 @@
   list-style: none;
   color: white;
   font-size: 1.5em;
+  text-decoration: none;
+
 }
 
 /* MENU WITH LOGIN INFO */
@@ -43,6 +45,7 @@
   grid-gap: 1px;
   list-style: none;
   color: white;
+ 
 }
 
 /* REGISTER */
@@ -168,4 +171,19 @@
 .review-listing{
   border: 2px solid;
   padding: auto;
+}
+
+/* CATEGORIES CSS */
+
+.category-container{
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-gap: 0.5em;
+  padding: 3em 1em 1em 1em;
+  
+}
+
+.category-product{
+  border: 2px black solid;
+  border-radius: 10px;
 }
