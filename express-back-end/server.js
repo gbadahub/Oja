@@ -40,7 +40,7 @@ App.use('/api', ojaRouter);
 // /user/endpoints
 const userRouter = express.Router();
 createUserLoginRoutes(userRouter, db_oja);
-App.use('/user', userRouter);
+App.use('/users', userRouter);
 
 
 App.get("/test", (req, res) => {
