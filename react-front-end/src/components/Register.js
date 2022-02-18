@@ -32,7 +32,7 @@ function Register() {
       formDetails.password
     ) {
       
-      axios.post("http://localhost:8080/api/v1/users/register/", {formDetails
+      axios.post("/register", {formDetails
       })
       .then(response =>{
         console.log(response)
