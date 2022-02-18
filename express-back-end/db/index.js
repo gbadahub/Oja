@@ -1,3 +1,4 @@
+
 require('dotenv').config();
 const Pool = require("pg").Pool;
 
@@ -35,12 +36,12 @@ const createConnection= () => {
     password: process.env.PGPASSWORD,
     port: process.env.PGPORT
   })
-  console.log(process.env)
+  console.log(process.env.PGPASSWORD);
   client.connect()
   
-  client.query('SELECT NOW()', (err, res) => (
-    console.log(err, res)
-  ))
+  // client.query('SELECT NOW()', (err, res) => (
+  //   console.log(err, res)
+  // ))
 
   return client;
 };

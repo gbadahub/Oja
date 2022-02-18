@@ -3,8 +3,8 @@ import axios from "axios";
 
 function Register() {
   const [formDetails, setFormDetails] = useState({
-    firstname: "",
-    lastname: "",
+    first_name: "",
+    last_name: "",
     email: "",
     password: "",
     phoneNumber: "",
@@ -32,7 +32,7 @@ function Register() {
       formDetails.password
     ) {
       
-      axios.post("http://localhost:8080/api/v1/users/register/", {formDetails
+      axios.post("http://localhost:8080/users/register", {formDetails
       })
       .then(response =>{
         console.log(response)
