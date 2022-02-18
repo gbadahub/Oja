@@ -14,7 +14,7 @@ const getUserFromUserEmail = function(email) {
       console.log(err.message);
   });
 }
-exports.getUserFromUserEmail = getUserFromUserEmail;
+
 
 // get all user info using their id 
 
@@ -29,7 +29,7 @@ const getUserWithId = function (id) {
       console.log(err.message);
     });
 }
-exports.getUserWithId = getUserWithId;
+
 
 // add a user to the db
 
@@ -43,7 +43,7 @@ const addUser = function (user) {
       console.log(err.message);
     });
 }
-exports.addUser = addUser;
+
 
 // add an item to products table to sell
 
@@ -57,7 +57,7 @@ const addItemForSale = function (products) {
       console.log(err.message);
     });
 }
-exports.addItemForSale = addItemForSale;
+
 
 // add order to orders table 
 
@@ -71,7 +71,7 @@ const appendOrdersTableWithUserId = function (orders) {
       console.log(err.message);
     });
 }
-exports.appendOrdersTableWithUserId = appendOrdersTableWithUserId;
+
 
 // add an order_item to order_item table 
 
@@ -85,7 +85,6 @@ const appendOrdersItemsTableWithCurrentOrder = function (order_items) {
       console.log(err.message);
     });
 }
-exports.appendOrdersItemsTableWithCurrentOrder = appendOrdersItemsTableWithCurrentOrder;
 
 
 // get ALL user order info using UserID 
@@ -102,7 +101,7 @@ const getOrdersFromUser = function (userId) {
     });
 };
 
-exports.getOrdersFromUser = getOrdersFromUser;
+
 
 // get total for the purchase/cart using userID
 
@@ -122,7 +121,6 @@ const getCheckoutPage = function (userId) {
     });
 };
 
-exports.getCheckoutPage = getCheckoutPage;
 
 // get related products from DB for a specific user up to 10 items
 // how do I not show the current product => *** 
@@ -139,7 +137,7 @@ const getRelatedProductsFromUser = function (userId) {
     });
 };
 
-exports.getRelatedProductsFromUser = getRelatedProductsFromUser;
+
 
 
 // get all products on sale for homepage display 
@@ -194,7 +192,7 @@ const getAllProductsUsingSearchBar = function (options, limit = 20)  {
     });
 };
 
-exports.getAllProductsUsingSearchBar = getAllProductsUsingSearchBar;
+
 
 // get all products for the homepage
 
@@ -208,7 +206,7 @@ const getAllProductsForHomepage = function (limit = 20) {
       console.log(err.message);
     });
 }
-exports.getAllProductsForHomepage = getAllProductsForHomepage;
+
 
 const getAllProductsFromShoes = function (limit = 20) {
   return db_oja_connection
@@ -220,7 +218,7 @@ const getAllProductsFromShoes = function (limit = 20) {
       console.log(err.message);
     });
 }
-exports.getAllProductsFromShoes = getAllProductsFromShoes;
+
 
 const getAllProductsFromClothing = function (limit = 20) {
   return db_oja_connection
@@ -232,7 +230,7 @@ const getAllProductsFromClothing = function (limit = 20) {
       console.log(err.message);
     });
 }
-exports.getAllProductsFromClothing = getAllProductsFromClothing;
+
 
 const getAllProductsFromBags = function (limit = 20) {
   return db_oja_connection
@@ -244,7 +242,7 @@ const getAllProductsFromBags = function (limit = 20) {
       console.log(err.message);
     });
 }
-exports.getAllProductsFromBags = getAllProductsFromBags;
+
 
 const getAllProductsFromAccessories = function (limit = 20) {
   return db_oja_connection
@@ -256,23 +254,25 @@ const getAllProductsFromAccessories = function (limit = 20) {
       console.log(err.message);
     });
 }
-exports.getAllProductsFromAccessories = getAllProductsFromAccessories;
+
 
 // get cart items
 const getCartInfoForUser = function (user_id, order_id) {
   return db_oja_connection
-    .query(`SELECT products.name AS name, products.price AS price, (orders.total_price_cents*100) AS cartTotal,
-  orders.created_at AS placed_at, order_items.order_id AS order_id from order_items
-  JOIN products ON order_items.product_id = products.id
-  WHERE user_id = $1 AND WHERE order_id = $2
-  GROUP BY order_items.order_id, products.name
-  ORDER BY order_items.order_id;`, [user_id, order_id])
+    .query(`Select products.name As name,
+    (products.price/100) As price, products.user_id As user_id, order_items.order_id As order_id,
+    (orders.total_price_cents/100) As cartTotal,
+    orders.created_at As placed_at From products
+    Join order_items on order_items.product_id = products.id
+    Join orders on orders.id = order_items.order_id
+    Where products.user_id = $1 And order_items.order_id = $2
+    Order By order_items.order_id;`, [user_id, order_id])
     .then((result) => result.rows)
     .catch((err) => {
       console.log(err.message);
     });
 }
-exports.getCartInfoForUser = getCartInfoForUser;
+
 // FIX THIS getCartInforForUSER QUERY 
 // need to create function to update total price in orders table 
 
@@ -284,8 +284,22 @@ exports.getCartInfoForUser = getCartInfoForUser;
 
 //export function 
 
-// SELECT products.name AS name, products.price AS price, (orders.total_price_cents*100) AS cartTotal,
-//  orders.created_at AS placed_at, order_items.order_id AS order_id from order_items
-//   JOIN products ON order_items.product_id = products.id
-//   GROUP BY order_items.order_id, products.name
-//   ORDER BY order_items.order_id;
+
+// split the functions based on relevant information. 
+
+
+module.exports = {
+  getAllProductsForHomepage,
+  getAllProductsFromAccessories, 
+  getAllProductsFromBags, 
+  getAllProductsFromClothing, 
+  getAllProductsFromShoes, 
+  getAllProductsUsingSearchBar, 
+  getCartInfoForUser, 
+  getCheckoutPage, 
+  getOrdersFromUser,
+  getRelatedProductsFromUser, 
+  getUserFromUserEmail,
+  getUserWithId, 
+  addUser
+}
