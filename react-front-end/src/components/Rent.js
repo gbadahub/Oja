@@ -62,7 +62,7 @@ function Rent() {
           <div className="listed-item">
             <input type="file" multiple accept="image" onChange={imageChange} />
             {imageURLs.map((imageSrc) => (
-              <img src={imageSrc} />
+              <img src={imageSrc} alt="slider"/>
             ))}
           </div>
           <input

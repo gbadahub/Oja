@@ -5,8 +5,8 @@ import Register from "./components/Register";
 import Login from "./components/Login";
 import Home from "./components/Home";
 import Rent from "./components/Rent";
-import { Route, Link, Routes } from "react-router-dom";
-
+import { Route, Routes } from "react-router-dom";
+// Link,
 function App() {
   return (
     <main className="App">
