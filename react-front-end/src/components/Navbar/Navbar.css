@@ -27,7 +27,7 @@
 }
 
 /* MENU WITH CATEGORIES */
-.nav-menu {
+.nav-bottom {
   display: grid;
   grid-template-columns: repeat(5, auto);
   grid-gap: 10px;
@@ -39,13 +39,18 @@
 }
 
 /* MENU WITH LOGIN INFO */
-.nav-items {
+.nav-top {
   display: grid;
   grid-template-columns: repeat(5, 4em);
   grid-gap: 1px;
   list-style: none;
   color: white;
  
+}
+
+.nav-top-list{
+  text-decoration: none;
+  color: inherit;
 }
 
 /* REGISTER */

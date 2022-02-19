@@ -1,9 +1,20 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+import Axios from "axios";
 
 function Rent() {
-  const [images, setImages] = useState([]);
-  const [imageURLs, setImageURLs] = useState([]);
+  
+const uploadImage =(files) =>{
+const formData = new FormData();
+formData.append("file", files[0]);
+formData.append("upload_preset", "")
+}
+
+Axios.post(
+  
+)
+
+
 
   const [formDetails, setFormDetails] = useState({
     image: "",
@@ -44,34 +55,14 @@ function Rent() {
     }
   };
 
-  useEffect(() => {
-    if (images.length < 1) {
-      return;
-    }
-    const uploadedImage = [];
-    images.forEach((image) => uploadedImage.push(URL.createObjectURL(image)));
-    setImageURLs(uploadedImage);
-  }, [images]);
-
-  function imageChange(e) {
-    setImages([...e.target.files]);
-  }
+  
 
   return (
     <>
       <h1> List your item</h1>
       <form onSubmit={handleSubmit} className="rent-page">
         <div className="rent-image">
-          <input
-            type="file"
-            multiple
-            accept="image"
-            onChange={imageChange}
-            className="img-upoloaded"
-          />
-          {imageURLs.map((imageSrc) => (
-            <img src={imageSrc} />
-          ))}
+          
         </div>
 
         <div className="listed-item">

@@ -12,7 +12,7 @@ function App() {
   return (
     <main className="App">
       <Navbar />
-<Bags/>
+
       <Routes>
         <Route path="/rent" element={<Rent />}></Route>
       </Routes>
