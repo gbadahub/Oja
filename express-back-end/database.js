@@ -9,7 +9,7 @@ const getUserFromUserEmail = function(email) {
     FROM users
     WHERE email = $1
     LIMIT 1;`, [email])
-    .then((result) => result.rows)
+    .then((result) => result.rows[0])
     .catch((err) =>  {
       console.log(err.message);
   });
@@ -35,9 +35,9 @@ const getUserWithId = function (id) {
 
 const addUser = function (user) {
   return db_oja_connection
-    .query(`INSERT INTO users (first_name, last_name, email, password)
-  VALUES ($1, $2, $3, $4)
-  RETURNING *`, [user.first_name, user.last_name, user.email, user.password])
+    .query(`INSERT INTO users (first_name, last_name, email, password, phone_number, country, province, city, street, postal)
+  VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10)
+  RETURNING *`, [user.first_name, user.last_name, user.email, user.password, user.phone_number, user.country, user.province, user.city, user.street, user.postal])
     .then(res => res.rows[0])
     .catch((err) => {
       console.log(err.message);
@@ -196,11 +196,10 @@ const getAllProductsUsingSearchBar = function (options, limit = 20)  {
 
 // get all products for the homepage
 
-const getAllProductsForHomepage = function (limit = 20) {
+const getAllProductsForHomepage = function () {
   return db_oja_connection
     .query(`SELECT *
-  FROM products
-  LIMIT $1`, [limit])
+  FROM products`)
     .then((result) => result.rows)
     .catch((err) => {
       console.log(err.message);
@@ -291,7 +290,7 @@ const getCartInfoForUser = function (user_id, order_id) {
 module.exports = {
   getAllProductsForHomepage,
   getAllProductsFromAccessories, 
-  getAllProductsFromBags, 
+  getAllProductsFromBags,
   getAllProductsFromClothing, 
   getAllProductsFromShoes, 
   getAllProductsUsingSearchBar, 
@@ -301,5 +300,8 @@ module.exports = {
   getRelatedProductsFromUser, 
   getUserFromUserEmail,
   getUserWithId, 
-  addUser
+  addUser, 
+  addItemForSale, 
+  appendOrdersTableWithUserId,
+  appendOrdersItemsTableWithCurrentOrder 
 }
