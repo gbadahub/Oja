@@ -6,7 +6,7 @@ function Rent() {
   const [imageURLs, setImageURLs] = useState([]);
 
   const [formDetails, setFormDetails] = useState({
-    image: "",
+    img: "",
     title: "",
     description: "",
     price: "",
@@ -24,14 +24,14 @@ function Rent() {
     console.log("Default form submission prevented");
 
     if (
-      formDetails.image &&
+      formDetails.img &&
       formDetails.title &&
       formDetails.description &&
       formDetails.price &&
       formDetails.categories
     ) {
       axios
-        .post("/rent", { formDetails })
+        .post("http://localhost:8080/api/rent", { formDetails })
         .then((response) => {
           console.log(response);
         })
@@ -46,7 +46,7 @@ function Rent() {
       return;
     }
     const uploadedImage = [];
-    images.forEach((image) => uploadedImage.push(URL.createObjectURL(image)));
+    images.forEach((img) => uploadedImage.push(URL.createObjectURL(img)));
     setImageURLs(uploadedImage);
   }, [images]);
 

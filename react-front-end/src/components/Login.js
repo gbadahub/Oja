@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import axios from "axios";
+import { FaWindows } from "react-icons/fa";
 
 function Login() {
 
@@ -24,11 +25,10 @@ function Login() {
       formDetails.password
     ) {
       
-      axios.post("/login", {formDetails
+      axios.post("http://localhost:8080/users/login", {formDetails
       })
       .then(response =>{
-        console.log(response)
-      })
+        console.log(response)})
       .catch(error =>{
         console.log(error)
       })

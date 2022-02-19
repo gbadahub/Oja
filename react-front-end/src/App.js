@@ -5,7 +5,7 @@ import Register from "./components/Register";
 import Login from "./components/Login";
 import Home from "./components/Home";
 import Rent from "./components/Rent";
-import { Route, Link, Routes } from "react-router-dom";
+import {  Route, Link, Routes } from "react-router-dom";
 
 function App() {
   return (
@@ -25,7 +25,7 @@ function App() {
       </Routes>
 
       <Routes>
-        <Route path="/home" element={<Home />}></Route>
+        <Route path="/homepage" element={<Home />}></Route>
       </Routes>
     </main>
   );
