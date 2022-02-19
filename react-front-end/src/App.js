@@ -5,7 +5,7 @@ import Register from "./components/Register";
 import Login from "./components/Login";
 import Home from "./components/Home";
 import Rent from "./components/Rent";
-import Bags from "./components/categories/Bags"
+import Products from "./components/categories/Products"
 import { Route, Link, Routes } from "react-router-dom";
 
 
@@ -18,7 +18,7 @@ function App() {
       <Navbar />
 
       <Routes>
-        <Route path="/bags" element={<Bags />}></Route>
+        <Route path="/categories/:id/:name" element={<Products />}></Route>
       </Routes>
 
       <Routes>

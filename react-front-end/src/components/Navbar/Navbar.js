@@ -27,7 +27,7 @@ function Navbar() {
 
       <ul className="nav-bottom">
         <li>
-        <Link to="/bags" className="nav-top-list">Bags</Link>
+        <Link to="/categories/1/Bags" className="nav-top-list">Bags</Link>
         </li>
         <li>Clothing</li>
         <li>Shoes</li>

@@ -1,6 +1,12 @@
-import React from "react";
+import React, {useState , useEffect} from "react";
+import {useParams} from "react-router-dom"
+import axios from "axios";
 
-function Bags() {
+
+function Products() {
+  // use a state 
+const params = useParams();
+console.log("test", params)
   return (
     <>
       <div className="category-container">
@@ -21,41 +27,4 @@ function Bags() {
   );
 }
 
-export default Bags;
-
-
-
-
-
-{/* <div class="items">
-<% for(let product of products) { %>
-  <div class="container-1">
-    <div class="p1">
-
-      <% if(product.sold ) {%>
-        Sold
-        <% } else {%>
-       Availabile
-       <% }%>
-
-        <header>
-        <a href="products/<%=product.id %>" target="_blank">   <img src="<%= product.url %>" />  </a>
-
-        </header>
-        <footer>
-
-          <div class="name-price">
-            <%= product.name %> $<%= product.price %>
-          </div>
-          <form >
-            <a href="/products/checkout/<%= product.id %>"><i class="fas fa-cart-plus"></i></a>
-          </form>
-          <form method="POST" action="/products/wishlist/add_product/<%-product.id %>" >
-            <button><i class="fas fa-heart"  style="color: blue" ></i></button>
-          </form>
-        </footer>
-    </div>
-  </div>
-
-  <% } %>
-</div> */}
+export default Products;

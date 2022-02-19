@@ -1,21 +1,24 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import axios from "axios";
-
-
+import { Image } from "cloudinary-react";
+// send request to category to render options
 function Rent() {
-
   const [imageSelected, setImageSelected] = useState("");
-  
-const uploadImage =() =>{
-const formData = new FormData();
-formData.append("file", imageSelected)
-formData.append("upload_preset", "geenpfex")
 
-axios.post("https://api.cloudinary.com/v1_1/dtqblycjk/upload", formData)
-.then((res)=> console.log(res))
-.catch((err)=> console.log(err))
-}
+  const uploadImage = () => {
+    const formData = new FormData();
+    formData.append("file", imageSelected);
+    formData.append("upload_preset", "geenpfex");
 
+    axios
+      .post("https://api.cloudinary.com/v1_1/dtqblycjk/upload", formData)
+      .then((res) => {
+        console.log(res);
+        setFormDetails({ ...formDetails, img: res.data.public_id });
+        
+      })
+      .catch((err) => console.log(err));
+  };
 
   const [formDetails, setFormDetails] = useState({
     img: "",
@@ -36,14 +39,16 @@ axios.post("https://api.cloudinary.com/v1_1/dtqblycjk/upload", formData)
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log("Default form submission prevented");
+    console.log("Default form submission prevented", formDetails);
 
     if (
       formDetails.img &&
       formDetails.title &&
       formDetails.description &&
       formDetails.price &&
-      formDetails.categories
+      formDetails.bags &&
+      formDetails.shoes &&
+      formDetails.accessories
     ) {
       axios
         .post("http://localhost:8080/api/rent", { formDetails })
@@ -56,21 +61,26 @@ axios.post("https://api.cloudinary.com/v1_1/dtqblycjk/upload", formData)
     }
   };
 
-  
-
   return (
-
-
     <>
       <h1> List your item</h1>
       <form onSubmit={handleSubmit} className="rent-page">
         <div className="rent-image">
-          <input type="file"
-          onChange={(e) =>{
-            setImageSelected(e.target.files[0])
-          }}
+          <input
+            type="file"
+            onChange={(e) => {
+              setImageSelected(e.target.files[0]);
+            }}
           />
-          <button onClick= {uploadImage}> Upload Image</button>
+          <button onClick={uploadImage}> Upload Image</button>
+          {/* add pulic/id */}
+          {formDetails.img && (
+            <Image
+              style={{ width: 200 }}
+              cloudName="dtqblycjk"
+              publicId={formDetails.img}
+            />
+          )}
         </div>
 
         <div className="listed-item">
