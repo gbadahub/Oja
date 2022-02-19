@@ -1,9 +1,17 @@
+const { getAllProductsForHomepage, getAllProductsFromClothing,
+   getAllProductsFromShoes, getAllProductsFromAccessories, 
+   getAllProductsFromBags, getCartInfoForUser, 
+   getCheckoutPage, appendOrdersTableWithUserId, 
+   getAllProductsUsingSearchBar, getOrdersFromUser, 
+   addItemForSale} = require('../database');
+
+
 module.exports = function(router, database) {
 
 
   // get all products 
   router.get('/homepage', (req, res) => {
-    database.getAllProductsForHomepage(20)
+    getAllProductsForHomepage()
     .then(products => res.json({products}))
     .catch(e => {
       console.error(e);
@@ -13,7 +21,7 @@ module.exports = function(router, database) {
 
   // get all clothing 
   router.get('/clothing', (req, res) => {
-    database.getAllProductsFromClothing(20)
+    getAllProductsFromClothing(20)
     .then(products => res.json({products}))
     .catch(e => {
       console.error(e);
@@ -23,7 +31,7 @@ module.exports = function(router, database) {
 
   // get all shoes
     router.get('/shoes', (req, res) => {
-    database.getAllProductsFromShoes(20)
+    getAllProductsFromShoes(20)
     .then(products => res.json({products}))
     .catch(e => {
       console.error(e);
@@ -33,7 +41,7 @@ module.exports = function(router, database) {
 
   // get all accessories 
     router.get('/accessories', (req, res) => {
-    database.getAllProductsFromAccessories(20)
+    getAllProductsFromAccessories(20)
     .then(products => res.json({products}))
     .catch(e => {
       console.error(e);
@@ -43,7 +51,7 @@ module.exports = function(router, database) {
 
   // get all bags
     router.get('/bags', (req, res) => {
-    database.getAllProductsFromBags(20)
+    getAllProductsFromBags(20)
     .then(products => res.json({products}))
     .catch(e => {
       console.error(e);
@@ -58,7 +66,7 @@ module.exports = function(router, database) {
       res.json({err: "💩"});
       return;
     }
-    database.getCheckoutPage(userId)
+    getCheckoutPage(userId)
     .then(orders => res.json({orders}))
     .catch(e => {
       console.error(e);
@@ -75,7 +83,7 @@ module.exports = function(router, database) {
       res.error("💩");
       return;
     }
-    database.getCartInfoForUser(userId, orderId)
+    getCartInfoForUser(userId, orderId)
     .then(orders => res.json({orders}))
     .catch(e => {
       console.error(e);
@@ -90,7 +98,7 @@ module.exports = function(router, database) {
   // WILL REQ>BODY GIVE ME THAT?
   router.post('/cart', (req, res) => {
     const userId = req.session.userId;
-    database.appendOrdersTableWithUserId({...req.body, owner_id: userId})
+    appendOrdersTableWithUserId({...req.body, owner_id: userId})
       .then(orders => {
         res.json(orders)
         const params = JSON.stringify({owner_id: userId})
@@ -117,7 +125,7 @@ module.exports = function(router, database) {
   router.post('/cart_two/:id', (req, res) => {
     console.log(req.params);
     // const userId = req.session.userId;
-    // database.appendOrdersItemsTableWithCurrentOrder({...req.body, owner_id: userId})
+    // appendOrdersItemsTableWithCurrentOrder({...req.body, owner_id: userId})
     //   .then(orders => {
     //     res.send(orders);
     //   })
@@ -130,7 +138,7 @@ module.exports = function(router, database) {
   // do I need to make a seperate route for search bar results?
 
   router.get('/search', (req, res) => {
-    database.getAllProductsUsingSearchBar(req.query, 20)
+    getAllProductsUsingSearchBar(req.query, 20)
     .then(products => res.send({products}))
     .catch(e => {
       console.error(e);
@@ -147,7 +155,7 @@ module.exports = function(router, database) {
       res.error("💩");
       return;
     }
-    database.getOrdersFromUser(userId)
+    getOrdersFromUser(userId)
     .then(orders => res.send({orders}))
     .catch(e => {
       console.error(e);
@@ -155,10 +163,10 @@ module.exports = function(router, database) {
     });
   });
 
-  // create an item to sell 
-  router.post('/sell', (req, res) => {
-    const userId = req.session.userId;
-    database.addItemForSale({...req.body, owner_id: userId})
+  // create an item to sell // help with backend working 
+  router.post('/rent', (req, res) => {
+    const userId = req.session.formDetails.userId;
+    addItemForSale({...req.body, owner_id: userId})
       .then(products => {
         res.send(products);
       })

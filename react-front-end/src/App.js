@@ -5,14 +5,18 @@ import Register from "./components/Register";
 import Login from "./components/Login";
 import Home from "./components/Home";
 import Rent from "./components/Rent";
-import { Route, Routes } from "react-router-dom";
-import Bags from "./components/categories/Bags";
+import { Route, Link, Routes } from "react-router-dom";
+import ImageSlider from "./components/Slider/ImageSlider";
+import { SlideData } from "./components/Slider/SliderData";
 
+
+
+// Link,
 function App() {
   return (
     <main className="App">
       <Navbar />
-
+     
       <Routes>
         <Route path="/rent" element={<Rent />}></Route>
       </Routes>
