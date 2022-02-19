@@ -1,30 +1,33 @@
-.NavbarItems{
+/* NAV BAR */
+
+.NavbarItems {
   background: black;
   height: 4em;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   padding-left: 1em;
-  padding-top:.5em ;
-  padding-bottom: .5em;
+  padding-top: 0.5em;
+  padding-bottom: 0.5em;
   position: sticky; /* Sticky/fixed navbar */
   top: 0;
   z-index: 20;
 }
 
-.nav-div-top{
+.nav-div-top {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
 }
 
-.navbar-logo{
+/* LOGO */
+.navbar-logo {
   color: gold;
   font-size: 1.5em;
 }
 
-
-.nav-menu{
+/* MENU WITH CATEGORIES */
+.nav-menu {
   display: grid;
   grid-template-columns: repeat(5, auto);
   grid-gap: 10px;
@@ -33,7 +36,8 @@
   font-size: 1.5em;
 }
 
-.nav-items{
+/* MENU WITH LOGIN INFO */
+.nav-items {
   display: grid;
   grid-template-columns: repeat(5, 4em);
   grid-gap: 1px;
@@ -41,33 +45,35 @@
   color: white;
 }
 
-.register-title{
+/* REGISTER */
+.register-title {
   display: flex;
   flex-direction: column;
   justify-content: center;
   background-color: #ba8759;
 }
 
-.register-page{
+.register-page {
   display: flex;
-    flex-direction: column;
-    justify-content: space-around;
-    padding:3em 20em 20em 20em;
-    background-color:#ba8759 ;
+  flex-direction: column;
+  justify-content: space-around;
+  padding: 3em 20em 20em 20em;
+  background-color: #ba8759;
 }
 
-.input{
+.input {
   padding: 1em;
   margin-bottom: 1.5em;
   border-radius: 7px;
 }
-.register-button{
+.register-button {
   padding: 1em;
   border-radius: 5px;
-  background-color:black ;
+  background-color: black;
   color: white;
 }
 
+/* SLIDING IMAGE/ HOME PAGE */
 .slider {
   position: relative;
   height: 100vh;
@@ -116,3 +122,50 @@
   transform: scale(1.08);
 }
 
+/* RENT PAGE */
+.rent-page {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+  padding-top: 2em;
+  margin-bottom: 2em;
+}
+
+.rent-image{
+  border: 1px solid;
+  max-height: 5em;
+  max-width: 5em;
+  
+}
+
+.img-uploaded{
+  width:60%;
+   height:60%;
+   object-fit: scale-down;
+}
+
+.listed-item {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.list-item-input{
+  padding: 1em;
+  margin-bottom: 1.5em;
+  border-radius: 7px;
+  width: 40em;
+}
+
+.listed-button{
+  padding: 1em;
+  border-radius: 5px;
+  background-color: black;
+  color: white;
+}
+
+.review-listing{
+  border: 2px solid;
+  padding: auto;
+}
