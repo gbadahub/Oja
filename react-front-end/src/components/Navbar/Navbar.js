@@ -19,7 +19,6 @@ function Navbar() {
             <Link to="/login" className="nav-top-list"> Login </Link>
           </li>
           <li>
-            {" "}
             <Link to="/register" className="nav-top-list">Register</Link>
           </li>
           <li>Cart</li>
@@ -27,7 +26,9 @@ function Navbar() {
       </div>
 
       <ul className="nav-bottom">
-        <li>Bags</li>
+        <li>
+        <Link to="/bags" className="nav-top-list">Bags</Link>
+        </li>
         <li>Clothing</li>
         <li>Shoes</li>
         <li>Accessories</li>

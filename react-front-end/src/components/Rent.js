@@ -1,14 +1,20 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 
-function Rent() {
-  
-const uploadImage =(files) =>{
-const formData = new FormData();
-formData.append("file", files[0]);
-formData.append("upload_preset", "")
-}
 
+function Rent() {
+
+  const [imageSelected, setImageSelected] = useState("");
+  
+const uploadImage =() =>{
+const formData = new FormData();
+formData.append("file", imageSelected)
+formData.append("upload_preset", "geenpfex")
+
+axios.post("https://api.cloudinary.com/v1_1/dtqblycjk/upload", formData)
+.then((res)=> console.log(res))
+.catch((err)=> console.log(err))
+}
 
 
   const [formDetails, setFormDetails] = useState({
@@ -53,11 +59,18 @@ formData.append("upload_preset", "")
   
 
   return (
+
+
     <>
       <h1> List your item</h1>
       <form onSubmit={handleSubmit} className="rent-page">
         <div className="rent-image">
-          
+          <input type="file"
+          onChange={(e) =>{
+            setImageSelected(e.target.files[0])
+          }}
+          />
+          <button onClick= {uploadImage}> Upload Image</button>
         </div>
 
         <div className="listed-item">
