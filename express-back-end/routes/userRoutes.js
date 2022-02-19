@@ -1,10 +1,16 @@
 const bcrypt = require('bcrypt');
 const { addUser } = require('../database');
+// const cookieSession = require('cookieSession');
+const app = require('express')()
+
+
+// app.use(cookieSession({
+//   name: 'session',
+//   keys: ['key1']
+// }));
 // require the rest of the function after 
 
 module.exports = function (router, database) {
-
-
   // create a new user in registration page
   router.post('/register', (req, res) => {
     const user = req.body.formDetails;

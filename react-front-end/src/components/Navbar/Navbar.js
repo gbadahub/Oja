@@ -2,11 +2,12 @@ import React from "react";
 // { Component, useState }
 import "./Navbar.css";
 import { Link } from "react-router-dom";
+import Search from "../SearchBar/Search"
 
 
 function Navbar() {
   return (
-    <nav className="NavbarItems">
+    <nav className="NavbarItems" >
       <div className="nav-div-top">
         <h1 className="navbar-logo"> OJA </h1>
 
@@ -14,7 +15,7 @@ function Navbar() {
           <li>
             <Link to="/home"> Home </Link>
           </li>
-          <li>Search</li>
+          <li className="search"><Search /></li>
           <li>
             <Link to="/login"> Login </Link>
           </li>

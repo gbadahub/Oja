@@ -26,8 +26,8 @@ function Register() {
     console.log("Default form submission prevented");
 
     if (
-      formDetails.firstname &&
-      formDetails.lastname &&
+      formDetails.first_name &&
+      formDetails.last_name &&
       formDetails.email &&
       formDetails.password
     ) {
@@ -49,19 +49,19 @@ function Register() {
       <form onSubmit={handleSubmit} className="register-page">
         <input
           type="text"
-          name="firstname"
+          name="first_name"
           placeholder="First Name"
           autoComplete="off"
-          value={formDetails.firstname}
+          value={formDetails.first_name}
           onChange={handleChange}
           className="input"
         />
         <input
-          type="lastname"
-          name="lastname"
+          type="last_name"
+          name="last_name"
           placeholder="Last Name"
           autoComplete="off"
-          value={formDetails.lastname}
+          value={formDetails.last_name}
           onChange={handleChange}
           className="input"
         />
