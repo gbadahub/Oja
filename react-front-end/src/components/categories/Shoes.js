@@ -19,13 +19,14 @@ function Shoes() {
   return (
     <>
       {product && (
-        <div className="category-container">
+        <div className="category-img">
           {product.map((item, index) => (
             <div className="category-product">
               <img src={item.img}
-              style={{width: 200}}/>
-            
-              <h4>  {item.name}</h4>
+              style={{width: 400}}
+              alt="Shoes Category"
+              />
+              <h4>  {item.name} ${item.price / 100}</h4>
             </div>
           ))}
         </div>

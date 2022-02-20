@@ -23,9 +23,11 @@ function Bags() {
           {product.map((item, index) => (
             <div className="category-product">
               <img src="https://images.unsplash.com/photo-1645259969594-9176d984713a?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870&q=80"
-              style={{width: 200}}/>
+              style={{width: 400}}
+              alt="Bags Category"
+              />
             
-              <h4>  {item.name}</h4>
+              <h4>  {item.name} ${item.price / 100}</h4>
             </div>
           ))}
         </div>

@@ -23,9 +23,13 @@ function Accessories() {
           {product.map((item, index) => (
             <div className="category-product">
              <img src={item.img}
-              style={{width: 200}}/>
-            
-              <h4>  {item.name}</h4>
+             className="container-img"
+              style={{width: 400}}
+              alt="Accessories Category"
+
+              />
+     
+              <h4>  {item.name} ${item.price / 100}</h4>
             </div>
           ))}
         </div>

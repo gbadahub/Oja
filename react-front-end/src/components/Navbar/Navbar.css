@@ -109,8 +109,8 @@ width: 500px;
 }
 
 .image {
-  width: 1065px;
-  height: 570px;
+  width: 1350px;
+  height: 700px;
   border-radius: 10px;
   object-fit: cover;
 }
@@ -198,14 +198,18 @@ width: 500px;
 
 /* CATEGORIES CSS */
 
-.category-img{
+.category-container{
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   grid-gap: 2em;
-  padding: 3em 1em 1em 1em;
-  object-fit: cover;
-  
+  padding: 1em 1em 1em 0.5em;
 }
+
+.container-img{
+  object-fit: fill;
+  width: 100%;
+}
+
 
 .category-product{
   border: 2px black solid;
