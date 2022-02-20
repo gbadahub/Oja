@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import axios from "axios";
-import { FaWindows } from "react-icons/fa";
 
 function Login() {
 

@@ -14,9 +14,10 @@
   z-index: 20;
 }
 
-/* .NavbarItems .nav-items .search{
-  width: 50%;
-  } */
+.search{
+  max-height: 0.5em;
+}
+
 
 .NavbarItems .nav-top .search:hover{
   display: flex;
@@ -67,6 +68,7 @@
 
 .nav-top li{
   margin: 0 1rem;
+ 
 }
 
 /* REGISTER */
@@ -107,8 +109,8 @@
 }
 
 .image {
-  width: 1065px;
-  height: 570px;
+  width: 1350px;
+  height: 700px;
   border-radius: 10px;
   object-fit: cover;
 }
@@ -199,10 +201,15 @@
 .category-container{
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  grid-gap: 0.5em;
-  padding: 3em 1em 1em 1em;
-  
+  grid-gap: 2em;
+  padding: 1em 1em 1em 0.5em;
 }
+
+.container-img{
+  object-fit: fill;
+  width: 100%;
+}
+
 
 .category-product{
   border: 2px black solid;

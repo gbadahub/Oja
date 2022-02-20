@@ -5,7 +5,10 @@ import Register from "./components/Register";
 import Login from "./components/Login";
 import Home from "./components/Home";
 import Rent from "./components/Rent";
-import Products from "./components/categories/Products"
+import Bags from "./components/categories/Bags";
+import Shoes from "./components/categories/Shoes";
+import Clothing from "./components/categories/Clothing";
+import Accessories from "./components/categories/Accessories";
 import { Route, Link, Routes } from "react-router-dom";
 
 
@@ -18,7 +21,20 @@ function App() {
       <Navbar />
 
       <Routes>
-        <Route path="/categories/:id/:name" element={<Products />}></Route>
+        <Route path="/bags" element={<Bags />}></Route>
+      </Routes>
+
+      <Routes>
+        <Route path="/shoes" element={<Shoes />}></Route>
+      </Routes>
+
+      <Routes>
+        <Route path="/accessories" element={<Accessories />}></Route>
+      </Routes>
+      
+
+      <Routes>
+        <Route path="/clothing" element={<Clothing />}></Route>
       </Routes>
 
       <Routes>
@@ -34,7 +50,7 @@ function App() {
       </Routes>
 
       <Routes>
-        <Route path="/home" element={<Home />}></Route>
+        <Route path="/homepage" element={<Home />}></Route>
       </Routes>
     </main>
   );

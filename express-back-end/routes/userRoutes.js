@@ -1,12 +1,6 @@
 const bcrypt = require('bcrypt');
-<<<<<<< HEAD
-const { addUser } = require('../database');
-// const cookieSession = require('cookieSession');
-const app = require('express')()
-=======
 const { addUser, getUserFromUserEmail, getUserWithId } = require('../database');
 // require the rest of the function after 
->>>>>>> 98aa4fbe440f0a24848ef7e7debcccfc6323808a
 
 
 // app.use(cookieSession({
