@@ -37,7 +37,7 @@ const addUser = function (user) {
   return db_oja_connection
     .query(`INSERT INTO users (first_name, last_name, email, password, phone_number, country, province, city, street, postal)
   VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10)
-  RETURNING *`, [user.first_name, user.last_name, user.email, user.password, user.phone_number, user.country, user.province, user.city, user.street, user.postal])
+  RETURNING *`, [user.first_name, user.last_name, user.email, user.password, user.phoneNumber, user.country, user.province, user.city, user.street, user.postal])
     .then(res => res.rows[0])
     .catch((err) => {
       console.log(err.message);

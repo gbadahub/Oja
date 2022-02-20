@@ -57,7 +57,7 @@ function Register() {
           className="input"
         />
         <input
-          type="text"
+          type="last_name"
           name="last_name"
           placeholder="Last Name"
           autoComplete="off"

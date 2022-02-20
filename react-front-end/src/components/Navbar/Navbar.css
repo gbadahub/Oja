@@ -2,7 +2,7 @@
 
 .NavbarItems {
   background: black;
-  height: 4em;
+  height: 6em;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -12,6 +12,16 @@
   position: sticky; /* Sticky/fixed navbar */
   top: 0;
   z-index: 20;
+}
+
+/* .NavbarItems .nav-items .search{
+  width: 50%;
+  } */
+
+.NavbarItems .nav-top .search:hover{
+  display: flex;
+  justify-content: flex-end;
+width: 500px;
 }
 
 .nav-div-top {
@@ -40,9 +50,11 @@
 
 /* MENU WITH LOGIN INFO */
 .nav-top {
-  display: grid;
-  grid-template-columns: repeat(5, 4em);
-  grid-gap: 1px;
+  display: flex;
+  width: 100%;
+  /* grid-template-columns: repeat(5, 4em);
+  grid-gap: 1px; */
+  justify-content: flex-end;
   list-style: none;
   color: white;
  
@@ -51,6 +63,10 @@
 .nav-top-list{
   text-decoration: none;
   color: inherit;
+}
+
+.nav-items li{
+  margin: 0 1rem;
 }
 
 /* REGISTER */
