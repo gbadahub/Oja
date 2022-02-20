@@ -21,7 +21,7 @@
 .NavbarItems .nav-top .search:hover{
   display: flex;
   justify-content: flex-end;
-width: 500px;
+  width: 500px;
 }
 
 .nav-div-top {
@@ -65,7 +65,7 @@ width: 500px;
   color: inherit;
 }
 
-.nav-items li{
+.nav-top li{
   margin: 0 1rem;
 }
 
