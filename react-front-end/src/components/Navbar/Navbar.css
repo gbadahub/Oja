@@ -198,11 +198,12 @@ width: 500px;
 
 /* CATEGORIES CSS */
 
-.category-container{
+.category-img{
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   grid-gap: 2em;
   padding: 3em 1em 1em 1em;
+  object-fit: cover;
   
 }
 

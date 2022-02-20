@@ -4,7 +4,7 @@ import axios from "axios";
 function Clothing() {
   const [product, setProduct] = useState("");
 
-  
+   
   useEffect(() => {
     axios.get("http://localhost:3000/api/clothing")
       .then((res) => {
@@ -19,7 +19,7 @@ function Clothing() {
   return (
     <>
       {product && (
-        <div className="category-container">
+        <div className="category-img">
           {product.map((item, index) => (
             <div className="category-product">
             <img src={item.img}
