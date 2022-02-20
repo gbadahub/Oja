@@ -12,7 +12,7 @@ function Navbar() {
 
         <ul className="nav-top">
           <li className="nav-top-list">
-            <Link to="/home" className="nav-top-list"> Home </Link>
+            <Link to="/homepage" className="nav-top-list"> Home </Link>
           </li>
           <li>Search</li>
           <li>
@@ -27,11 +27,11 @@ function Navbar() {
 
       <ul className="nav-bottom">
         <li>
-        <Link to="/categories/1/Bags" className="nav-top-list">Bags</Link>
+        <Link to="/bags" className="nav-top-list">Bags</Link>
         </li>
-        <li>Clothing</li>
-        <li>Shoes</li>
-        <li>Accessories</li>
+        <li><Link to="/clothing" className="nav-top-list">Clothing</Link></li>
+        <li><Link to="/shoes" className="nav-top-list">Shoes</Link></li>
+        <li><Link to="/accessories" className="nav-top-list">Accessories</Link></li>
         <li>
         <Link to="/rent" className="nav-top-list"> Rent </Link>
         </li>

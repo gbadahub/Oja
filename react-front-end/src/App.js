@@ -18,7 +18,20 @@ function App() {
       <Navbar />
 
       <Routes>
-        <Route path="/categories/:id/:name" element={<Products />}></Route>
+        <Route path="/bags" element={<Products />}></Route>
+      </Routes>
+
+      <Routes>
+        <Route path="/shoes" element={<Products />}></Route>
+      </Routes>
+
+      <Routes>
+        <Route path="/accessories" element={<Products />}></Route>
+      </Routes>
+      
+
+      <Routes>
+        <Route path="/clothing" element={<Products />}></Route>
       </Routes>
 
       <Routes>
@@ -34,7 +47,7 @@ function App() {
       </Routes>
 
       <Routes>
-        <Route path="/home" element={<Home />}></Route>
+        <Route path="/homepage" element={<Home />}></Route>
       </Routes>
     </main>
   );
