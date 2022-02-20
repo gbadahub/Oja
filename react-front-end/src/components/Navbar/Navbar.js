@@ -12,10 +12,13 @@ function Navbar() {
         <h1 className="navbar-logo"> OJA </h1>
 
         <ul className="nav-top">
+          
+          <li className="search"
+          
+           ><Search /></li>
           <li className="nav-top-list">
             <Link to="/homepage" className="nav-top-list"> Home </Link>
           </li>
-          <li className="search"><Search /></li>
           <li>
             <Link to="/login" className="nav-top-list"> Login </Link>
           </li>
