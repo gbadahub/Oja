@@ -5,12 +5,21 @@ import Register from "./components/Register";
 import Login from "./components/Login";
 import Home from "./components/Home";
 import Rent from "./components/Rent";
-import { Route, Routes } from "react-router-dom";
+import Products from "./components/categories/Products"
+import { Route, Link, Routes } from "react-router-dom";
+
+
+
+
 // Link,
 function App() {
   return (
     <main className="App">
       <Navbar />
+
+      <Routes>
+        <Route path="/categories/:id/:name" element={<Products />}></Route>
+      </Routes>
 
       <Routes>
         <Route path="/rent" element={<Rent />}></Route>

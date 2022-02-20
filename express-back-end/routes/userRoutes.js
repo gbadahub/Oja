@@ -1,7 +1,12 @@
 const bcrypt = require('bcrypt');
+<<<<<<< HEAD
 const { addUser } = require('../database');
 // const cookieSession = require('cookieSession');
 const app = require('express')()
+=======
+const { addUser, getUserFromUserEmail, getUserWithId } = require('../database');
+// require the rest of the function after 
+>>>>>>> 98aa4fbe440f0a24848ef7e7debcccfc6323808a
 
 
 // app.use(cookieSession({
@@ -15,7 +20,7 @@ module.exports = function (router, database) {
   router.post('/register', (req, res) => {
     const user = req.body.formDetails;
     console.log(user);
-    const salt = bcrypt.genSaltSync(10)
+    const salt = bcrypt.genSaltSync(10);
     user.password = bcrypt.hashSync(user.password, salt);
     addUser(user)
       .then(user => {
@@ -35,18 +40,24 @@ module.exports = function (router, database) {
  * @param {String} password encrypted
  */
   const login = function (email, password) {
-    return database.getUserFromUserEmail(email)
+    return (
+      // MAKE SURE TO USE NEW USER
+      // need help to redirect it to homepage?
+      getUserFromUserEmail(email)
       .then(user => {
+        console.log('pwd:', user.password)
+        console.log('hashPwd:', bcrypt.compareSync(password, user.password))
         if (bcrypt.compareSync(password, user.password)) {
           return user;
         }
         return null;
-      });
+      })
+    );
   }
-  exports.login = login;
+  // exports.login = login;
 
   router.post('/login', (req, res) => {
-    const { email, password } = req.body;
+    const { email, password } = req.body.formDetails;
     login(email, password)
       .then(user => {
         if (!user) {
@@ -56,7 +67,7 @@ module.exports = function (router, database) {
         req.session.userId = user.id;
         res.json({ user: { name: user.first_name, email: user.email, id: user.id } });
       })
-      .catch(e => res.json(e));
+      .catch(e => res.send(e.message));  
   });
 
   router.post('/logout', (req, res) => {
@@ -71,7 +82,7 @@ module.exports = function (router, database) {
       return;
     }
 
-    database.getUserWithId(userId)
+    getUserWithId(userId)
       .then(user => {
         if (!user) {
           res.send({ error: "no user with that id" });

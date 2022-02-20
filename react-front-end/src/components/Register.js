@@ -7,7 +7,7 @@ function Register() {
     last_name: "",
     email: "",
     password: "",
-    phoneNumber: "",
+    phone_number: "",
     country: "",
     province: "",
     city: "",
@@ -85,10 +85,10 @@ function Register() {
         />
         <input
           type="number"
-          name="phoneNumber"
+          name="phone_number"
           placeholder="Phone number"
           autoComplete="off"
-          value={formDetails.phoneNumber}
+          value={formDetails.phone_number}
           onChange={handleChange}
           className="input"
         />

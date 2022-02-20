@@ -9,7 +9,7 @@ const getUserFromUserEmail = function(email) {
     FROM users
     WHERE email = $1
     LIMIT 1;`, [email])
-    .then((result) => result.rows)
+    .then((result) => result.rows[0])
     .catch((err) =>  {
       console.log(err.message);
   });
@@ -196,11 +196,10 @@ const getAllProductsUsingSearchBar = function (options, limit = 20)  {
 
 // get all products for the homepage
 
-const getAllProductsForHomepage = function (limit = 20) {
+const getAllProductsForHomepage = function () {
   return db_oja_connection
     .query(`SELECT *
-  FROM products
-  LIMIT $1`, [limit])
+  FROM products`)
     .then((result) => result.rows)
     .catch((err) => {
       console.log(err.message);
@@ -291,7 +290,7 @@ const getCartInfoForUser = function (user_id, order_id) {
 module.exports = {
   getAllProductsForHomepage,
   getAllProductsFromAccessories, 
-  getAllProductsFromBags, 
+  getAllProductsFromBags,
   getAllProductsFromClothing, 
   getAllProductsFromShoes, 
   getAllProductsUsingSearchBar, 
@@ -301,5 +300,8 @@ module.exports = {
   getRelatedProductsFromUser, 
   getUserFromUserEmail,
   getUserWithId, 
-  addUser
+  addUser, 
+  addItemForSale, 
+  appendOrdersTableWithUserId,
+  appendOrdersItemsTableWithCurrentOrder 
 }

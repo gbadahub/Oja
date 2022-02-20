@@ -1,11 +1,11 @@
 const {createConnection} = require('./db/index');
 const db_oja = createConnection();
-const createUserLoginRoutes = require('./routes/userRoutes');
+const createUserRoutes = require('./routes/userRoutes');
 const createOjaRoutes = require('./routes/ojaRoutes');
 
 const express = require('express');
 const BodyParser = require('body-parser');
-const router = express.Router();
+const Router = express.Router();
 
 
 const cors = require("cors");
@@ -32,14 +32,14 @@ App.use(cors())
 App.use(express.static('public'));
 
 // oja endpoints 
-const ojaRouter = express.Router();
+const ojaRouter = Router; 
 createOjaRoutes(ojaRouter, db_oja);
 App.use('/api', ojaRouter);
 
 
 // /user/endpoints
-const userRouter = express.Router();
-createUserLoginRoutes(userRouter, db_oja);
+const userRouter = Router;
+createUserRoutes(userRouter, db_oja);
 App.use('/users', userRouter);
 
 
