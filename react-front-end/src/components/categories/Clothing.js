@@ -26,9 +26,9 @@ function Clothing() {
               style={{ width: 450 }}
               alt="Clothing Category"
                />
-              <h4>
-                {item.name} ${item.price / 100}
-              </h4>
+              <h4> {item.name} </h4>
+              <h4>${item.price / 100}</h4>
+              <p>{item.description}</p>
             </div>
           ))}
         </div>
