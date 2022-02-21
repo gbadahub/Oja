@@ -60,7 +60,7 @@ function App() {
       
 
       <Routes>
-        <Route path="/rent" element={<Rent />}></Route>
+        <Route path="/rent" element={ isLoggedIn ? < Rent /> : <p> 404 LOG IN PLEASE </p>}></Route>
       </Routes>
 
       <Routes>
