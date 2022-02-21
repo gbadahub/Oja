@@ -44,15 +44,16 @@ const addUser = function (user) {
     });
 }
 
+// DO SESSION STORAGE INSTEAD --> if u have time try to figure out why the cookie storage isn't working 
 
-// add an item to products table to sell
+const addItemForSale = function (products) {
+  const {formDetails: {img, title, description, price, catId}, owner_id} = products;
 
-const addItemForSale = function (products) { 
   return db_oja_connection
     .query(`INSERT INTO products (name, price, img, description, is_available, category_id, user_id)
   VALUES ($1, $2, $3, $4, $5, $6, $7)
-  RETURNING *`, [products.name, products.price, products.img, products.description, products.is_available, products.category_id, products.user_id])
-    .then(res => res.rows[0])
+  RETURNING *`, [title, price, img, description, true, catId, owner_id])
+    .then(res =>  res.rows[0])
     .catch((err) => {
       console.log(err.message);
     });
@@ -126,19 +127,15 @@ const getCheckoutPage = function (userId) {
 // how do I not show the current product => *** 
 // NESTED Q ..  ???? COME BACK TO THISS 
 
+
 const getRelatedProductsFromUser = function (userId) {
   return db_oja_connection
   .query(`SELECT * FROM products WHERE user_id = $1 LIMIT 10;`, [userId])
-  .query( `SELECT * FROM products WHERE user_id = 4;`)
-  .then(res => console.log(res) )
     .then(res => res.rows[0])
     .catch((err) => {
       console.log(err.message);
     });
 };
-
-
-
 
 // get all products on sale for homepage display 
 
