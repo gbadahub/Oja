@@ -1,19 +1,12 @@
 const bcrypt = require('bcrypt');
 const { addUser, getUserFromUserEmail, getUserWithId } = require('../database');
-// require the rest of the function after 
 
-
-// app.use(cookieSession({
-//   name: 'session',
-//   keys: ['key1']
-// }));
-// require the rest of the function after 
 
 module.exports = function (router, database) {
   // create a new user in registration page
   router.post('/register', (req, res) => {
     const user = req.body.formDetails;
-    console.log(user);
+    // console.log(user);
     const salt = bcrypt.genSaltSync(10);
     user.password = bcrypt.hashSync(user.password, salt);
     addUser(user)
@@ -35,12 +28,10 @@ module.exports = function (router, database) {
  */
   const login = function (email, password) {
     return (
-      // MAKE SURE TO USE NEW USER
-      // need help to redirect it to homepage?
       getUserFromUserEmail(email)
       .then(user => {
-        console.log('pwd:', user.password)
-        console.log('hashPwd:', bcrypt.compareSync(password, user.password))
+        // console.log('pwd:', user.password)
+        // console.log('hashPwd:', bcrypt.compareSync(password, user.password))
         if (bcrypt.compareSync(password, user.password)) {
           return user;
         }
@@ -48,7 +39,7 @@ module.exports = function (router, database) {
       })
     );
   }
-  // exports.login = login;
+
 
   router.post('/login', (req, res) => {
     const { email, password } = req.body.formDetails;
@@ -58,35 +49,39 @@ module.exports = function (router, database) {
           res.json({ error: "error" });
           return;
         }
+        console.log('user:', user);
         req.session.userId = user.id;
+
+        // console.log('req.session:', req.session.userId);
         res.json({ user: { name: user.first_name, email: user.email, id: user.id } });
       })
       .catch(e => res.send(e.message));  
   });
 
-  router.post('/logout', (req, res) => {
-    req.session.userId = null;
-    res.send({});
-  });
 
-  router.get("/me", (req, res) => {
-    const userId = req.session.userId;
-    if (!userId) {
-      res.send({ message: "not logged in" });
-      return;
-    }
+  // router.post('/logout', (req, res) => {
+  //   req.session.userId = null;
+  //   res.send({});
+  // });
 
-    getUserWithId(userId)
-      .then(user => {
-        if (!user) {
-          res.send({ error: "no user with that id" });
-          return;
-        }
+  // router.get("/me", (req, res) => {
+  //   const userId = req.session.userId;
+  //   if (!userId) {
+  //     res.send({ message: "not logged in" });
+  //     return;
+  //   }
 
-        res.send({ user: { name: user.first_name, email: user.email, id: user.id } });
-      })
-      .catch(e => res.send(e));
-  });
+  //   getUserWithId(userId)
+  //     .then(user => {
+  //       if (!user) {
+  //         res.send({ error: "no user with that id" });
+  //         return;
+  //       }
+
+  //       res.send({ user: { name: user.first_name, email: user.email, id: user.id } });
+  //     })
+  //     .catch(e => res.send(e));
+  // });
 
   return router;
 }

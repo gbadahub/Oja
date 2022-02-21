@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
 import ImageSlider from "./Slider/ImageSlider";
 import { SlideData } from "./Slider/SliderData";
-import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 function Home() {
   const [feature, setFeature] = useState("");
@@ -10,15 +10,12 @@ function Home() {
   const [popular, setPopular] = useState("");
 
   let navigate = useNavigate();
-  axios
-    .get("http://localhost:8080/api/homepage", {})
-    .then((response) => {
-      // navigate('/api/homepage');
-      // useNavigate()('/homepage');
-      console.log(response);
-    })
-    .catch((error) => {
-      console.log(error);
+  axios.get("http://localhost:8080/api/homepage", { })
+      .then(response =>{
+        console.log(response); 
+      })
+      .catch(error =>{
+        console.log(error);
     });
 
   useEffect(() => {

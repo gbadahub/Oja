@@ -14,7 +14,7 @@ const {
 
 module.exports = function (router, database) {
   // get all products
-  router.get("/home", (req, res) => {
+  router.get("/homepage", (req, res) => {
     getAllProductsForHomepage()
       .then((products) => res.json({ products }))
       .catch((e) => {
@@ -33,6 +33,16 @@ module.exports = function (router, database) {
       });
   });
 
+  router.get("/clothing/products_by_id", (req, res) => {
+    const itemId = req.query.itemId
+
+    getAllProductsFromClothing()
+   .then((products) => res.json({product: products.filter(product => product.id === Number(itemId)) }))
+   .catch((err) => {
+     res.json(err)
+   })
+  });
+
   // get all shoes
   router.get("/shoes", (req, res) => {
     getAllProductsFromShoes(20)
@@ -41,6 +51,16 @@ module.exports = function (router, database) {
         console.error(e);
         res.json(e);
       });
+  });
+
+  router.get("/shoes/products_by_id", (req, res) => {
+    const itemId = req.query.itemId
+
+    getAllProductsFromShoes()
+   .then((products) => res.json({ product: products.filter(product => product.id === Number(itemId)) }))
+   .catch((err) => {
+     res.json(err)
+   })
   });
 
   // get all accessories
@@ -53,10 +73,21 @@ module.exports = function (router, database) {
       });
   });
 
+  router.get("/accessories/products_by_id", (req, res) => {
+    const itemId = req.query.itemId
+
+   getAllProductsFromAccessories()
+   .then((products) => res.json({ product: products.filter(product => product.id === Number(itemId)) }))
+   .catch((err) => {
+     res.json(err)
+   })
+  });
+
   // get all bags
   router.get("/bags", (req, res) => {
     getAllProductsFromBags(20)
       .then((products) => {
+        // console.log('regsession:', JSON.stringify(req.session, null, 2))  
         
         res.json({ products });
       })
@@ -65,6 +96,16 @@ module.exports = function (router, database) {
         console.error(e);
         res.json(e);
       });
+  });
+
+  router.get("/bags/products_by_id", (req, res) => {
+    const itemId = req.query.itemId
+
+    getAllProductsFromBags()
+   .then((products) => res.json({ product: products.filter(product => product.id === Number(itemId)) }))
+   .catch((err) => {
+     res.json(err)
+   })
   });
 
   // get checkoutpage/ summary page logged in only
@@ -170,8 +211,9 @@ module.exports = function (router, database) {
 
   // create an item to sell // help with backend working
   router.post("/rent", (req, res) => {
-    const userId = req.session.formDetails.userId;
-    addItemForSale({ ...req.body, owner_id: userId })
+    // console.log('Req Headers:', req.headers);
+    const userid = req.headers.userid;
+    addItemForSale({ ...req.body, owner_id: userid })
       .then((products) => {
         res.send(products);
       })

@@ -1,0 +1,68 @@
+*{
+  box-sizing: border-box;
+}
+
+/* div wrapper */
+.item-product{
+  display: flex;
+  justify-content: center;
+  margin-top: 40px;
+}
+
+/* image */
+.item-product .itemImage{
+  width: 300px; 
+}
+
+/* separates image from other items */
+.main{
+align-items: center;
+margin-left: 20px;
+}
+
+/* name and location box */
+.nameLocation{
+  display: flex;
+  border: 2px solid black;
+  border-radius: 5px;
+}
+
+.nameLocation h4{
+  padding: 10px;
+}
+
+/* item information */
+.itemInfo{
+  margin-top: 20px;
+  padding: 15px;
+  border: 2px solid black;
+}
+
+.itemDescription ul{
+  padding-left: 20px;
+}
+
+.upperCase{
+  text-transform: capitalize;
+  list-style-type:circle;
+}
+
+.itemInfo .itemName, .itemPrice{
+  margin: 10px 0;
+}
+
+/* dropdown */
+.DropDown{
+  margin-top: 20px;
+}
+
+.DropDown h4{
+  margin-bottom: 20px;
+}
+
+/* button */
+.addtoCart{
+  padding: 20px;
+  margin-top: 20px;
+  border-radius: 10px;
+}

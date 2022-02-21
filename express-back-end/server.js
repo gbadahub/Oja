@@ -9,7 +9,7 @@ const Router = express.Router();
 
 
 const cors = require("cors");
-// const cookieSession = require('cookie-session');
+const cookieSession = require('cookie-session');
 
 const App = express();
 
@@ -18,17 +18,18 @@ const App = express();
 // pass connection into routes file 
 
 // did I get cookie-session properly?
-// App.use(cookieSession({
-//   name: 'session',
-//   keys: ['key1']
-// }));
+App.use(cookieSession({
+  name: 'session',
+  keys: ['key1'], 
+  secure: false
+}));
 
 
 // Express Configuration
 App.use(BodyParser.urlencoded({ extended: false }));
 App.use(BodyParser.json());
 
-App.use(cors())
+App.use(cors({credentials: true}));
 App.use(express.static('public'));
 
 // oja endpoints 
@@ -44,6 +45,8 @@ App.use('/users', userRouter);
 
 
 App.get("/test", (req, res) => {
+  // const mySession= req.session;
+  // console.log('mySession------', mySession);
   res.send("🤗");
 });
 
