@@ -1,7 +1,10 @@
 import React, { useState } from "react";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
+
 
 function Register() {
+  let navigate = useNavigate();
   const [formDetails, setFormDetails] = useState({
     first_name: "",
     last_name: "",
@@ -36,6 +39,7 @@ function Register() {
       })
       .then(response =>{
         console.log(response)
+        navigate("/login");
       })
       .catch(error =>{
         console.log(error)
