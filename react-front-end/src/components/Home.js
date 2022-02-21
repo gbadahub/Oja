@@ -2,6 +2,7 @@ import React, {useState , useEffect} from "react";
 import ImageSlider from "./Slider/ImageSlider";
 import { SlideData } from "./Slider/SliderData";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 function Home (){
 const [feature, setFeature] = useState('')
