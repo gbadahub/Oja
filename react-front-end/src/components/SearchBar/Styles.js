@@ -17,7 +17,6 @@ export const Container = styled.div`
   justify-content: center;
   align-items: center;
   flex-direction: column;
-
   ${({ hover }) =>
     hover &&
     css`
@@ -25,7 +24,6 @@ export const Container = styled.div`
       -webkit-box-shadow: 5px 5px 15px 5px rgba(0, 0, 0, 0.74);
       box-shadow: 5px 5px 15px 5px rgba(0, 0, 0, 0.74);
       border: 4px solid #00adb5;
-
       @media (min-width: 768px) {
         width: 80%;
       }
@@ -48,7 +46,6 @@ export const SearchInput = styled.input`
   -moz-appearance: none;
   -webkit-appearance: none;
   appearance: none;
-
   display: ${(props) => (props.showSearchInput ? "block" : "none")};
 `;
 
@@ -57,7 +54,6 @@ const fadeIn = keyframes`
   from {
     opacity: 0;
   }
-
   to {
     opacity: 1;
   }

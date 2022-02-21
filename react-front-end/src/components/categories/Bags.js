@@ -4,9 +4,9 @@ import axios from "axios";
 function Bags() {
   const [product, setProduct] = useState("");
 
-  
   useEffect(() => {
-    axios.get("http://localhost:3000/api/bags")
+    axios
+      .get("http://localhost:3000/api/bags")
       .then((res) => {
         console.log("res", res);
         setProduct(res.data.products);
@@ -22,12 +22,11 @@ function Bags() {
         <div className="category-container">
           {product.map((item, index) => (
             <div className="category-product">
-              <img src="https://images.unsplash.com/photo-1645259969594-9176d984713a?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870&q=80"
-              style={{width: 400}}
-              alt="Bags Category"
-              />
-            
-              <h4>  {item.name} ${item.price / 100}</h4>
+              <img src={item.img} style={{ width: 450 }} alt="Bags Category" />
+
+              <h4> {item.name} </h4>
+              <h4>${item.price / 100}</h4>
+              <p>{item.description}</p>
             </div>
           ))}
         </div>
