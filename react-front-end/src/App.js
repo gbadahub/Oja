@@ -6,12 +6,14 @@ import Login from "./components/Login";
 import Home from "./components/Home";
 import Rent from "./components/Rent";
 import Bags from "./components/categories/Bags";
+import BagsItemsPage from "./components/DetailItemPage/Bagdetails/BagsItems"
 import Shoes from "./components/categories/Shoes";
+import ShoesItemPage from "./components/DetailItemPage/Shoesdetails/ShoesItem";
 import Clothing from "./components/categories/Clothing";
+import ClothingItemPage from "./components/DetailItemPage/Clothingdetail/ClothingItem"
 import Accessories from "./components/categories/Accessories";
+import AccessoriesItemPage from "./components/DetailItemPage/Accessoriesdetails/AccessoriesItem";
 import { Route, Link, Routes } from "react-router-dom";
-
-
 
 
 // Link,
@@ -25,17 +27,34 @@ function App() {
       </Routes>
 
       <Routes>
+        <Route path="/bags/:itemId" element={<BagsItemsPage />}></Route>
+      </Routes>
+
+      <Routes>
         <Route path="/shoes" element={<Shoes />}></Route>
       </Routes>
 
       <Routes>
+        <Route path="/shoes/:itemId" element={<ShoesItemPage />}></Route>
+      </Routes>
+
+      <Routes>
         <Route path="/accessories" element={<Accessories />}></Route>
+      </Routes>
+
+      <Routes>
+        <Route path="/accessories/:itemId" element={<AccessoriesItemPage />}></Route>
       </Routes>
       
 
       <Routes>
         <Route path="/clothing" element={<Clothing />}></Route>
       </Routes>
+
+      <Routes>
+        <Route path="/clothing/:itemId" element={<ClothingItemPage />}></Route>
+      </Routes>
+      
 
       <Routes>
         <Route path="/rent" element={<Rent />}></Route>

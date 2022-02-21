@@ -22,16 +22,15 @@ function Accessories() {
         <div className="category-container">
           {product.map((item, index) => (
             <div className="category-product">
-              <img
+             <a href={`/accessories/${item.id}`}> <img
                 src={item.img}
                 className="container-img"
                 style={{ width: 400 }}
                 alt="Accessories Category"
-              />
+              /> </a>
 
               <h4> {item.name} </h4>
               <h4>${item.price / 100}</h4>
-              <p>{item.description}</p>
             </div>
           ))}
         </div>

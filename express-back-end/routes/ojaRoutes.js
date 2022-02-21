@@ -33,6 +33,16 @@ module.exports = function (router, database) {
       });
   });
 
+  router.get("/clothing/products_by_id", (req, res) => {
+    const itemId = req.query.itemId
+
+    getAllProductsFromClothing()
+   .then((products) => res.json({product: products.filter(product => product.id === Number(itemId)) }))
+   .catch((err) => {
+     res.json(err)
+   })
+  });
+
   // get all shoes
   router.get("/shoes", (req, res) => {
     getAllProductsFromShoes(20)
@@ -43,6 +53,16 @@ module.exports = function (router, database) {
       });
   });
 
+  router.get("/shoes/products_by_id", (req, res) => {
+    const itemId = req.query.itemId
+
+    getAllProductsFromShoes()
+   .then((products) => res.json({ product: products.filter(product => product.id === Number(itemId)) }))
+   .catch((err) => {
+     res.json(err)
+   })
+  });
+
   // get all accessories
   router.get("/accessories", (req, res) => {
     getAllProductsFromAccessories(20)
@@ -51,6 +71,16 @@ module.exports = function (router, database) {
         console.error(e);
         res.json(e);
       });
+  });
+
+  router.get("/accessories/products_by_id", (req, res) => {
+    const itemId = req.query.itemId
+
+   getAllProductsFromAccessories()
+   .then((products) => res.json({ product: products.filter(product => product.id === Number(itemId)) }))
+   .catch((err) => {
+     res.json(err)
+   })
   });
 
   // get all bags
@@ -65,6 +95,16 @@ module.exports = function (router, database) {
         console.error(e);
         res.json(e);
       });
+  });
+
+  router.get("/bags/products_by_id", (req, res) => {
+    const itemId = req.query.itemId
+
+    getAllProductsFromBags()
+   .then((products) => res.json({ product: products.filter(product => product.id === Number(itemId)) }))
+   .catch((err) => {
+     res.json(err)
+   })
   });
 
   // get checkoutpage/ summary page logged in only

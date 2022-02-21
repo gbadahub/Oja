@@ -209,9 +209,11 @@ const getAllProductsForHomepage = function () {
 
 const getAllProductsFromShoes = function (limit = 20) {
   return db_oja_connection
-    .query(`SELECT *
-  FROM products WHERE category_id = 3
-  LIMIT $1`, [limit])
+    .query(`SELECT products.*, users.first_name, users.last_name, users.province
+    FROM products 
+    Join users ON user_id=users.id
+    WHERE category_id = 3
+    LIMIT $1`, [limit])
     .then((result) => result.rows)
     .catch((err) => {
       console.log(err.message);
@@ -221,8 +223,10 @@ const getAllProductsFromShoes = function (limit = 20) {
 
 const getAllProductsFromClothing = function (limit = 20) {
   return db_oja_connection
-    .query(`SELECT *
-  FROM products WHERE category_id = 2
+    .query(`SELECT products.*, users.first_name, users.last_name, users.province
+  FROM products 
+  Join users ON user_id=users.id
+  WHERE category_id = 2
   LIMIT $1`, [limit])
     .then((result) => result.rows)
     .catch((err) => {
@@ -233,9 +237,11 @@ const getAllProductsFromClothing = function (limit = 20) {
 
 const getAllProductsFromBags = function (limit = 20) {
   return db_oja_connection
-    .query(`SELECT *
-  FROM products WHERE category_id = 1
-  LIMIT $1`, [limit])
+    .query(`SELECT products.*, users.first_name, users.last_name, users.province
+    FROM products 
+    Join users ON user_id=users.id
+    WHERE category_id = 1
+    LIMIT $1`, [limit])
     .then((result) => result.rows)
     .catch((err) => {
       console.log(err.message);
@@ -245,9 +251,11 @@ const getAllProductsFromBags = function (limit = 20) {
 
 const getAllProductsFromAccessories = function (limit = 20) {
   return db_oja_connection
-    .query(`SELECT *
-  FROM products WHERE category_id = 4
-  LIMIT $1`, [limit])
+    .query(`SELECT products.*, users.first_name, users.last_name, users.province
+    FROM products 
+    Join users ON user_id=users.id
+    WHERE category_id = 4
+    LIMIT $1`, [limit])
     .then((result) => result.rows)
     .catch((err) => {
       console.log(err.message);
