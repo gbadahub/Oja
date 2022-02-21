@@ -92,9 +92,20 @@ width: 500px;
 }
 
 /* SLIDING IMAGE/ HOME PAGE */
-.home-picks{
+.home-container{
   display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  padding-top: 2em;
+  
 }
+.home-picks{
+font-size: 2em;
+}
+.home-newlyAdded{
+  font-size: 2em;
+}
+
 .slider {
   position: relative;
   height: 100vh;
