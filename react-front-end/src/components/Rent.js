@@ -2,7 +2,10 @@ import React, { useState } from "react";
 import axios from "axios";
 import { Image } from "cloudinary-react";
 // send request to category to render options
-function Rent() {
+
+
+
+function Rent({loginAuth, setLoginAuth}) {
   const [imageSelected, setImageSelected] = useState("");
 
   const uploadImage = () => {
@@ -25,12 +28,13 @@ function Rent() {
     title: "",
     description: "",
     price: "",
-    bags: "",
-    clothing: "",
-    shoes: "",
-    accessories: "",
+    catId: 0
   });
-
+  const handleSelectorChange = (e) => {
+    console.log('Selectorchange:', e.target.value);
+    setFormDetails({ ...formDetails, catId: e.target.value });
+  };
+  
   const handleChange = (e) => {
     const name = e.target.name;
     const value = e.target.value;
@@ -40,18 +44,24 @@ function Rent() {
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log("Default form submission prevented", formDetails);
+    const userId = localStorage.getItem('user_id');
 
     if (
       formDetails.img &&
       formDetails.title &&
       formDetails.description &&
-      formDetails.price &&
-      formDetails.bags &&
-      formDetails.shoes &&
-      formDetails.accessories
+      formDetails.price ||
+      formDetails.bags ||
+      formDetails.shoes ||
+      formDetails.accessories ||
+      formDetails.clothing 
     ) {
       axios
-        .post("http://localhost:8080/api/rent", { formDetails })
+        .post("http://localhost:8080/api/rent", { formDetails }, { 
+          headers: {  
+            'userid': userId
+          }
+        })
         .then((response) => {
           console.log(response);
         })
@@ -115,11 +125,11 @@ function Rent() {
           />
 
           <label>Choose a Category:</label>
-          <select onChange={handleChange} className="list-item-input">
-            <option value={formDetails.bags}>Bags</option>
-            <option value={formDetails.clothing}>Clothing</option>
-            <option value={formDetails.shoes}>Shoes</option>
-            <option value={formDetails.accessories}>Accessories</option>
+          <select onChange={handleSelectorChange} className="list-item-input">
+            <option value ='1' >Bags</option>
+            <option value ='2' >Clothing</option>
+            <option value ='3' >Shoes</option>
+            <option value ='4' >Accessories</option>
           </select>
 
           <button type="submit" className="listed-button">
@@ -129,30 +139,18 @@ function Rent() {
       </form>
       <h2> Review Other Listings</h2>
       <div className="review-listing">
-        Lorem Ipsum is simply dummy text of the printing and typesetting
-        industry. Lorem Ipsum has been the industry's standard dummy text ever
-        since the 1500s, when an unknown printer took a galley of type and
-        scrambled it to make a type specimen book. It has survived not only five
-        centuries, but also the leap into electronic typesetting, remaining
-        essentially unchanged. It was popularised in the 1960s with the release
-        of Letraset sheets containing Lorem Ipsum passages, and more recently
-        with desktop publishing software like Aldus PageMaker including versions
-        of Lorem Ipsum. Where does it come from? Contrary to popular belief,
-        Lorem Ipsum is not simply random text. It has roots in a piece of
-        classical Latin literature from 45 BC, making it over 2000 years old.
-        Richard McClintock, a Latin professor at Hampden-Sydney College in
-        Virginia, looked up one of the more obscure Latin words, consectetur,
-        from a Lorem Ipsum passage, and going through the cites of the word in
-        classical literature, discovered the undoubtable source. Lorem Ipsum
-        comes from sections 1.10.32 and 1.10.33 of "de Finibus Bonorum et
-        Malorum" (The Extremes of Good and Evil) by Cicero, written in 45 BC.
-        This book is a treatise on the theory of ethics, very popular during the
-        Renaissance. The first line of Lorem Ipsum, "Lorem ipsum dolor sit
-        amet..", comes from a line in section 1.10.32. The standard chunk of
-        Lorem Ipsum used since the 1500s is reproduced below for those
-        interested. Sections 1.10.32 and 1.10.33 from "de Finibus Bonorum et
-        Malorum" by Cicero are also reproduced in their exact original form,
-        accompanied by English versions from the 1914 translation by H. Rackham.
+            {/* how to use this retrieval function without having a get route? Do i need to create a get route for this?*/}
+            {/* create endpoint that takes in user_id, append at the end of the array
+            get call to db using user_id to get items bring back []
+            form details get populated and u post 
+            append to the list the form details that u made and display 
+            */}
+            <div>
+              
+            </div>
+            <div>
+
+            </div>
       </div>
     </>
   );

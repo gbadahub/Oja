@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import "./App.css";
 import Navbar from "./components/Navbar/Navbar";
 import Register from "./components/Register";
@@ -12,15 +12,17 @@ import ShoesItemPage from "./components/DetailItemPage/Shoesdetails/ShoesItem";
 import Clothing from "./components/categories/Clothing";
 import ClothingItemPage from "./components/DetailItemPage/Clothingdetail/ClothingItem"
 import Accessories from "./components/categories/Accessories";
-import AccessoriesItemPage from "./components/DetailItemPage/Accessoriesdetails/AccessoriesItem";
-import { Route, Link, Routes } from "react-router-dom";
+import { Route, Routes } from "react-router-dom";
 
 
 // Link,
 function App() {
+  const [isLoggedIn, setIsLoggedIn] = useState(localStorage.getItem('user_id') || false); 
+  const [loginAuth, setLoginAuth] = useState(localStorage.getItem('user_name') || '');
+
   return (
     <main className="App">
-      <Navbar />
+      <Navbar isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} loginAuth={loginAuth} setLoginAuth={setLoginAuth}/>
 
       <Routes>
         <Route path="/bags" element={<Bags />}></Route>
@@ -59,13 +61,13 @@ function App() {
       <Routes>
         <Route path="/rent" element={<Rent />}></Route>
       </Routes>
-      
+
       <Routes>
         <Route path="/register" element={<Register />}></Route>
       </Routes>
 
       <Routes>
-        <Route path="/login" element={<Login />}></Route>
+        <Route path="/login" element={<Login setLoginAuth={setLoginAuth} setIsLoggedIn={setIsLoggedIn} />}></Route>
       </Routes>
 
       <Routes>

@@ -92,6 +92,9 @@ width: 500px;
 }
 
 /* SLIDING IMAGE/ HOME PAGE */
+.home-picks{
+  display: flex;
+}
 .slider {
   position: relative;
   height: 100vh;

@@ -1,8 +1,11 @@
 import React, { useState } from "react";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
-function Login() {
-
+// pass in destructed setLoginAuth to Login function
+// LOG IN PARAMETER SHOULD BE CHECKED THROUGH LOCALSTORAGE WHEN TRYING TO LOGOUT 
+function Login({setLoginAuth, setIsLoggedIn}) {
+   let navigate = useNavigate();
   const [formDetails, setFormDetails] = useState({
     email: "",
     password: "",
@@ -27,8 +30,14 @@ function Login() {
       axios.post("http://localhost:8080/users/login", {formDetails
       })
       .then(response =>{
-        console.log(response)})
-      .catch(error =>{
+        console.log('response:', response);
+        setLoginAuth(response.data.user.name);
+        setIsLoggedIn(true);
+        localStorage.setItem('user_id', response.data.user.id);
+        localStorage.setItem('user_name', response.data.user.name);
+        navigate("/homepage");
+      })
+      .catch(error =>{ 
         console.log(error)
       })
     }
