@@ -10,6 +10,7 @@ const Router = express.Router();
 
 const cors = require("cors");
 const cookieSession = require('cookie-session');
+const App = express();
 
 App.use(cookieSession({
   name: 'session',
