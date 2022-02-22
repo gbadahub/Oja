@@ -25,7 +25,7 @@ module.exports = function (router, database) {
 
   // get all clothing
   router.get("/clothing", (req, res) => {
-    getAllProductsFromClothing(20)
+    getAllProductsFromClothing(30)
       .then((products) => res.json({ products }))
       .catch((e) => {
         console.error(e);
@@ -45,7 +45,7 @@ module.exports = function (router, database) {
 
   // get all shoes
   router.get("/shoes", (req, res) => {
-    getAllProductsFromShoes(20)
+    getAllProductsFromShoes(30)
       .then((products) => res.json({ products }))
       .catch((e) => {
         console.error(e);
@@ -65,7 +65,7 @@ module.exports = function (router, database) {
 
   // get all accessories
   router.get("/accessories", (req, res) => {
-    getAllProductsFromAccessories(20)
+    getAllProductsFromAccessories(30)
       .then((products) => res.json({ products }))
       .catch((e) => {
         console.error(e);
@@ -85,7 +85,7 @@ module.exports = function (router, database) {
 
   // get all bags
   router.get("/bags", (req, res) => {
-    getAllProductsFromBags(20)
+    getAllProductsFromBags(30)
       .then((products) => {
         // console.log('regsession:', JSON.stringify(req.session, null, 2))  
         
@@ -126,10 +126,11 @@ module.exports = function (router, database) {
   // get items in cart logged in only
   // AM I GETTING THE RIGHT CART INFORMATION uing orderID?????
   router.get("/cart", (req, res) => {
-    const userId = req.session.userId;
+    console.log("test", req.session)
+    const userid = req.headers.userid;
     const orderId = req.session.orderId;
-    if (!userId) {
-      res.error("💩");
+    if (!userid) {
+      res.send("💩");
       return;
     }
     getCartInfoForUser(userId, orderId)
@@ -213,6 +214,7 @@ module.exports = function (router, database) {
   router.post("/rent", (req, res) => {
     // console.log('Req Headers:', req.headers);
     const userid = req.headers.userid;
+    console.log("rent", userid)
     addItemForSale({ ...req.body, owner_id: userid })
       .then((products) => {
         res.send(products);

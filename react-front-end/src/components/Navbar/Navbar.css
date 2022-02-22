@@ -221,3 +221,10 @@ font-size: 2em;
   border: 2px black solid;
   border-radius: 10px;
 }
+
+/* CART CSS */
+.cart-container{
+display:flex;
+flex-direction: column;
+justify-content: center;
+}

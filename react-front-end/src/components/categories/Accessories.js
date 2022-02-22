@@ -1,15 +1,17 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 
+
 function Accessories() {
   const [product, setProduct] = useState("");
+
 
   useEffect(() => {
     axios
       .get("http://localhost:3000/api/accessories")
       .then((res) => {
-        console.log("res", res);
         setProduct(res.data.products);
+        
       })
       .catch((err) => {
         console.log(err);
