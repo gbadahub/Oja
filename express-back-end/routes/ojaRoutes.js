@@ -10,11 +10,14 @@ const {
   getAllProductsUsingSearchBar,
   getOrdersFromUser,
   addItemForSale,
+  getRelatedProductsFromUser, 
+  removeItemForSale,
   getProductbyId,
   getProductsFromSpecificSeller
 } = require("../database");
 
 module.exports = function (router, database) {
+
   // get all products
   router.get("/homepage", (req, res) => {
     getAllProductsForHomepage()
@@ -47,7 +50,6 @@ module.exports = function (router, database) {
 
   router.get("/clothing/:product_id", (req, res) => {
     const productId = req.params.product_id
-    
     getProductbyId(productId)
    .then((product) => {
       if(!product){
@@ -309,6 +311,32 @@ module.exports = function (router, database) {
         res.send(e);
       });
   });
+
+  // get other listing from user
+  router.get("/rent", (req, res) => {
+    // console.log('Req Headers:', req.headers);
+    const userid = req.headers.userid;
+    getRelatedProductsFromUser(userid)
+      .then((products) => res.json({ products }))
+      .catch((e) => {
+        console.error(e);
+        res.send(e);
+      });
+  });
+  
+  router.post("/rent/:productId", (req, res) => {
+    // console.log('Req Headers:', req.headers);
+    const productId = req.params.productId;
+    removeItemForSale( productId )
+      .then((products) => {
+        res.send(products);
+      })
+      .catch((e) => {
+        console.error(e);
+        res.send(e);
+      });
+  });
+
 
   return router;
 };

@@ -59,6 +59,30 @@ const addItemForSale = function (products) {
     });
 }
 
+const markItemAsRented = function (product_id) {
+  return db_oja_connection
+    .query(`UPDATE products Set is_available = false
+  WHERE id = $1
+  RETURNING *`, [product_id])
+    .then(res =>  res.rows[0])
+    .catch((err) => {
+      console.log(err.message);
+    });
+}
+
+// Remove item 
+
+const removeItemForSale = function (product_id) {
+  return db_oja_connection
+    .query(`DELETE FROM products
+  WHERE id = $1
+  RETURNING *`, [product_id])
+    .then(res =>  res.rows[0])
+    .catch((err) => {
+      console.log(err.message);
+  });
+}
+
 
 // add order to orders table 
 
@@ -130,8 +154,8 @@ const getCheckoutPage = function (userId) {
 
 const getRelatedProductsFromUser = function (userId) {
   return db_oja_connection
-  .query(`SELECT * FROM products WHERE user_id = $1 LIMIT 10;`, [userId])
-    .then(res => res.rows[0])
+  .query(`SELECT * FROM products WHERE user_id = $1 LIMIT 3;`, [userId])
+    .then(res => res.rows)
     .catch((err) => {
       console.log(err.message);
     });
@@ -337,5 +361,7 @@ module.exports = {
   addUser, 
   addItemForSale, 
   appendOrdersTableWithUserId,
-  appendOrdersItemsTableWithCurrentOrder 
+  appendOrdersItemsTableWithCurrentOrder, 
+  removeItemForSale, 
+  markItemAsRented
 }

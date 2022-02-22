@@ -2,8 +2,7 @@ import React, { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
-// pass in destructed setLoginAuth to Login function
-// LOG IN PARAMETER SHOULD BE CHECKED THROUGH LOCALSTORAGE WHEN TRYING TO LOGOUT 
+
 function Login({setLoginAuth, setIsLoggedIn}) {
    let navigate = useNavigate();
   const [formDetails, setFormDetails] = useState({

@@ -2,14 +2,12 @@ import React, { useState, useEffect } from "react";
 import ImageSlider from "./Slider/ImageSlider";
 import { SlideData } from "./Slider/SliderData";
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
 
 function Home() {
   const [feature, setFeature] = useState("");
   const [newAdded, setNewAdded] = useState("");
   const [popular, setPopular] = useState("");
 
-  let navigate = useNavigate();
   axios.get("http://localhost:8080/api/homepage", { })
       .then(response =>{
         console.log(response); 
