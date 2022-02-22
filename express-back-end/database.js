@@ -255,6 +255,33 @@ const getAllProductsFromClothing = function (limit = 20) {
     });
 }
 
+const getProductbyId = function (productId, limit = 1) {
+  return db_oja_connection
+    .query(`SELECT products.*, users.first_name, users.last_name, users.province
+  FROM products 
+  Join users ON user_id=users.id
+  WHERE products.id = $1
+  LIMIT $2`, [productId, limit])
+    .then((result) => result.rows[0])
+    .catch((err) => {
+      console.log(err.message);
+    });
+}
+
+const getProductsFromSpecificSeller= function (sellerId, limit = 5) {
+  return db_oja_connection
+    .query(`SELECT products.*, users.first_name, users.last_name, users.province
+  FROM products 
+  Join users ON user_id=users.id
+  WHERE user_id = $1
+  LIMIT $2`, [sellerId, limit])
+    .then((result) => result.rows)
+    .catch((err) => {
+      console.log(err.message);
+    });
+}
+
+
 
 const getAllProductsFromBags = function (limit = 20) {
   return db_oja_connection
@@ -321,6 +348,7 @@ module.exports = {
   getAllProductsFromAccessories, 
   getAllProductsFromBags,
   getAllProductsFromClothing, 
+  getProductsFromSpecificSeller,
   getAllProductsFromShoes, 
   getAllProductsUsingSearchBar, 
   getCartInfoForUser, 
@@ -329,6 +357,7 @@ module.exports = {
   getRelatedProductsFromUser, 
   getUserFromUserEmail,
   getUserWithId, 
+  getProductbyId,
   addUser, 
   addItemForSale, 
   appendOrdersTableWithUserId,
