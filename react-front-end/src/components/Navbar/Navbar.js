@@ -1,5 +1,4 @@
 import React from "react";
-import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import "./Navbar.css";
 import { Link } from "react-router-dom";
@@ -27,20 +26,22 @@ function Navbar({loginAuth, setLoginAuth, isLoggedIn, setIsLoggedIn}) {
     navigate("/homepage");
   };
 
-  const homepageHandler = () => {
-    axios.get("/homepage", { })
-      .then(response =>{
-        console.log(response); 
-      })
-      .catch(error =>{
-        console.log(error);
-    });
-  };
+  // const homepageHandler = () => {
+  //   axios.get("http://localhost:8080/api/homepage", { })
+  //     .then(response =>{
+  //       console.log(response); 
+  //     })
+  //     .catch(error =>{
+  //       console.log(error);
+  //   });
+  // };
 
   return (
     <nav className="NavbarItems" >
       <div className="nav-div-top">
-        <h1 className="navbar-logo" onClick={homepageHandler}> OJA </h1>
+        <h1 className="navbar-logo">   
+        <Link to="/homepage" className="nav-top-list"> OJA </Link>
+        </h1>
 
         <ul className="nav-top">
           

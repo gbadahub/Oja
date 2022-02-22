@@ -1,5 +1,26 @@
 INSERT INTO products (name,price,img,description, is_available,category_id, user_id)
-VALUES ('Beige Veneta', 3000, 'https://www.net-a-porter.com/variants/images/17411127377170366/in/w2000_q60.jpg', '- beige
+VALUES ('Gucci Dionysus Bag', 3900, 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQqPkJ4MRSiVpan9fRjAUG3-BtZxYMnoU2PnA&usqp=CAU', '- Super Cute
+ - Tiger head
+- Chain shoulder strap ', true, 1,1),
+('Jacquemus Bag', 2000, 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ9VeCRkY7KyBVbLMRNt_nMaQNEg2ki56lMYQ&usqp=CAU', '- Pink
+ - Leather
+- Includes long straps ', true, 1,2),
+('Classic Handbag', 5000, 'https://i.pinimg.com/736x/01/56/6e/01566e22ad9ef6d0695282c3f787de05.jpg', '- Lambskin & Gold-Tone Metal
+ - White
+', true, 1,3),
+('Lady Dior Mini', 4500, 'https://i.pinimg.com/originals/05/e1/af/05e1af43f21276c843dc8c7e1bd6fce8.jpg', '- Burgendy
+- Detachable chain
+ - Made in France
+', true, 1,4),
+('Celine Luggage Handbag', 4500, 'https://i.pinimg.com/originals/05/e1/af/05e1af43f21276c843dc8c7e1bd6fce8.jpg', '- Dune
+- Calfskin
+ - Silver Finishing
+', true, 1,5),
+('Valentino VSLING', 2800, 'https://i.pinimg.com/474x/67/2c/52/672c52f345b5eb82faa3879f069f24b0.jpg', '- Green
+- Calfskin
+ - Gold chain straps
+', true, 1,6),
+('Beige Veneta', 3000, 'https://www.net-a-porter.com/variants/images/17411127377170366/in/w2000_q60.jpg', '- beige
  - leather
 - padded design
 - gold-tone hardware
@@ -7,14 +28,14 @@ VALUES ('Beige Veneta', 3000, 'https://www.net-a-porter.com/variants/images/1741
 - magnetic fastening
 - adjustable shoulder strap
 - main compartment', true, 1,2),
-('Lime-Green Bottega Veneta', 5600, 'https://www.refinery29.com/images/10761680.jpg','- Lime Gree
+('Lime-Green Bottega Veneta', 3000, 'https://www.refinery29.com/images/10761680.jpg','- Lime Gree
 - leather
 - padded Intrecciato design
 - front flap closure
 - clasp fastening
 - internal zip-fastening pocket
 - adjustable shoulder strap', true,1,2),
-('Purple Bottega Veneta', 6660, 'https://www.yoogiscloset.com/media/catalog/product/cache/1/image/9df78eab33525d08d6e5fb8d27136e95/3/3/330460_01.jpg','- purple
+('Purple Bottega Veneta', 3800, 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQXjqm0qYqSHHtY7q-XjB1qkIvXh0VLaoE28g&usqp=CAU','- purple
 - leather
 - interwoven design
 - polished finish

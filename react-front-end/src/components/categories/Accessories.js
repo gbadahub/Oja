@@ -3,6 +3,7 @@ import axios from "axios";
 import Typography from "@material-ui/core/Typography";
 import Slider from "@material-ui/core/Slider";
 
+
 function Accessories() {
   const [product, setProduct] = useState([]);
   const [filterLow, setFilterLow] = useState(0);
@@ -21,12 +22,13 @@ function Accessories() {
     return (price > filterLow && price < filterHigh);
   })
 
+
   useEffect(() => {
     axios
       .get("http://localhost:3000/api/accessories")
       .then((res) => {
-        console.log("res", res);
         setProduct(res.data.products);
+        
       })
       .catch((err) => {
         console.log(err);
