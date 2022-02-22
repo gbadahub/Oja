@@ -41,7 +41,7 @@ function Home() {
 
   useEffect(() => {
     axios
-      .get("http://localhost:3000/api/clothing")
+      .get("http://localhost:3000/api/bags")
       .then((res) => {
         console.log("res", res);
         setPopular(res.data.products);
@@ -71,7 +71,7 @@ function Home() {
         <div className="home-picks">
           Newly Added
           <div>
-            <img src={newAdded[7].img} style={{ width: 400 }} />
+            <img src={newAdded[4].img} style={{ width: 400 }} />
           </div>
         </div>
       )}

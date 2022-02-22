@@ -1,8 +1,8 @@
 INSERT INTO products (name,price,img,description, is_available,category_id, user_id)
-VALUES ('Gucci Dionysus Bag', 3900, 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQqPkJ4MRSiVpan9fRjAUG3-BtZxYMnoU2PnA&usqp=CAU', '- Super Cute
+VALUES ('Gucci Dionysus Bag', 3900, 'https://i.pinimg.com/564x/c9/de/a5/c9dea56bf8bb87bfc6e4dbf2015a11e0.jpg', '- Super Cute
  - Tiger head
 - Chain shoulder strap ', true, 1,1),
-('Jacquemus Bag', 2000, 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ9VeCRkY7KyBVbLMRNt_nMaQNEg2ki56lMYQ&usqp=CAU', '- Pink
+('Jacquemus Bag', 2000, 'https://i.pinimg.com/564x/b5/cc/05/b5cc05ae734a3d616e67b145250bc811.jpg', '- Pink
  - Leather
 - Includes long straps ', true, 1,2),
 ('Classic Handbag', 5000, 'https://i.pinimg.com/736x/01/56/6e/01566e22ad9ef6d0695282c3f787de05.jpg', '- Lambskin & Gold-Tone Metal
@@ -12,7 +12,7 @@ VALUES ('Gucci Dionysus Bag', 3900, 'https://encrypted-tbn0.gstatic.com/images?q
 - Detachable chain
  - Made in France
 ', true, 1,4),
-('Celine Luggage Handbag', 4500, 'https://i.pinimg.com/originals/05/e1/af/05e1af43f21276c843dc8c7e1bd6fce8.jpg', '- Dune
+('Celine Luggage Handbag', 4500, 'https://i.pinimg.com/474x/3a/32/49/3a32491ae76f3806e7c7a2a586ccc51c.jpg', '- Dune
 - Calfskin
  - Silver Finishing
 ', true, 1,5),

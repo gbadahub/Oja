@@ -27,7 +27,7 @@ width: 500px;
 /* LOGO */
 .navbar-logo {
   color: gold;
-  font-size: 1.5em;
+  font-size: 3em;
 }
 
 /* MENU WITH CATEGORIES */
@@ -68,15 +68,15 @@ width: 500px;
   display: flex;
   flex-direction: column;
   justify-content: center;
-  background-color: #ba8759;
+  color: black
 }
 
 .register-page {
   display: flex;
   flex-direction: column;
   justify-content: space-around;
-  padding: 3em 20em 20em 20em;
-  background-color: #ba8759;
+  padding: 3em 20em 30em 20em;
+  background-image: url('https://images.unsplash.com/photo-1558303522-d7a2bdfdbd82?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=765&q=80');
 }
 
 .input {
@@ -89,6 +89,7 @@ width: 500px;
   border-radius: 5px;
   background-color: black;
   color: white;
+  font-size: 1em;
 }
 
 /* SLIDING IMAGE/ HOME PAGE */
@@ -97,6 +98,7 @@ width: 500px;
   flex-direction: row;
   justify-content: space-around;
   padding-top: 2em;
+ 
   
 }
 .home-picks{

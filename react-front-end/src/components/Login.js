@@ -44,8 +44,9 @@ function Login({setLoginAuth, setIsLoggedIn}) {
 
   return (
     <>
-      <h1 className="register-title"> Log Into Your Account!</h1>
+      
       <form onSubmit={handleSubmit} className="register-page">
+      <h1 className="register-title"> Log Into Your Account!</h1>
         <input
           type="email"
           name="email"

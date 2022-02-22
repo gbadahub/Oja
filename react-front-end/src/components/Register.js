@@ -49,8 +49,9 @@ function Register() {
 
   return (
     <>
-      <h1 className="register-title"> Sign up!</h1>
+      
       <form onSubmit={handleSubmit} className="register-page">
+      <h1 className="register-title"> Sign up!</h1>
         <input
           type="text"
           name="first_name"
