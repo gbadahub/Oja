@@ -11,13 +11,6 @@ const Router = express.Router();
 const cors = require("cors");
 const cookieSession = require('cookie-session');
 
-const App = express();
-
-// require the db and connection creation function 
-// create connection with db 
-// pass connection into routes file 
-
-// did I get cookie-session properly?
 App.use(cookieSession({
   name: 'session',
   keys: ['key1'], 
