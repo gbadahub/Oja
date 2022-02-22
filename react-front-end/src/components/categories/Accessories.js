@@ -5,22 +5,20 @@ import Slider from "@material-ui/core/Slider";
 
 function Accessories() {
   const [product, setProduct] = useState([]);
-  // const [filterLow, setFilterLow] = useState(40);
-  // const [filterHigh, setFilterHigh] = useState(50);
-  const [value, setValue] =  useState([40, 50]);
+  const [filterLow, setFilterLow] = useState(0);
+  const [filterHigh, setFilterHigh] = useState(100);
 
   // Changing State when volume increases/decreases
   const rangeSelector = (event, newValue) => {
-    setValue(newValue);
-    console.log(newValue)
+    setFilterLow(newValue[0])
+    setFilterHigh(newValue[1])
   };
 
   const filteredProducts = product.filter((item) => {
-    //const price = item.price / 100
-
-    return value;
     
-    //(price > filterLow && price < filterHigh)
+    const price = item.price / 100;
+    
+    return (price > filterLow && price < filterHigh);
   })
 
   useEffect(() => {
@@ -48,7 +46,7 @@ function Accessories() {
           Select Price Range:
         </Typography>
         <Slider
-          value={value}
+          value={[filterLow, filterHigh]}
           onChange={rangeSelector}
           valueLabelDisplay="auto"
         />
