@@ -13,10 +13,6 @@ import Clothing from "./components/categories/Clothing";
 import ClothingItemPage from "./components/DetailItemPage/Clothingdetail/ClothingItem"
 import Accessories from "./components/categories/Accessories";
 import AccessoriesItemPage from "./components/DetailItemPage/Accessoriesdetails/AccessoriesItem";
-<<<<<<< HEAD
-import Cart from "./components/Cart";
-=======
->>>>>>> 2d410e4f625b4d5f80d8ba553aef64a9773ca871
 import { Route, Routes } from "react-router-dom";
 
 
@@ -29,8 +25,6 @@ function App() {
     <main className="App">
       <Navbar isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} loginAuth={loginAuth} setLoginAuth={setLoginAuth}/>
 
-
-<Cart/>
       <Routes>
         <Route path="/bags" element={<Bags />}></Route>
       </Routes>
