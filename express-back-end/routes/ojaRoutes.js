@@ -10,6 +10,8 @@ const {
   getAllProductsUsingSearchBar,
   getOrdersFromUser,
   addItemForSale,
+  getProductbyId,
+  getProductsFromSpecificSeller
 } = require("../database");
 
 module.exports = function (router, database) {
@@ -33,11 +35,31 @@ module.exports = function (router, database) {
       });
   });
 
-  router.get("/clothing/products_by_id", (req, res) => {
-    const itemId = req.query.itemId
+  // router.get("/clothing/products_by_id", (req, res) => {
+  //   const itemId = req.query.itemId
 
-    getAllProductsFromClothing()
-   .then((products) => res.json({product: products.filter(product => product.id === Number(itemId)) }))
+  //   getAllProductsFromClothing()
+  //  .then((products) => res.json({product: products.filter(product => product.id === Number(itemId)) }))
+  //  .catch((err) => {
+  //    res.json(err)
+  //  })
+  // });
+
+  router.get("/clothing/:product_id", (req, res) => {
+    const productId = req.params.product_id
+    
+    getProductbyId(productId)
+   .then((product) => {
+      if(!product){
+        return res.json({ product: {}})
+      }
+      
+      getProductsFromSpecificSeller(product.user_id)
+      .then(otherProducts => {
+        res.json({ product, otherProducts })
+      })
+     
+    })
    .catch((err) => {
      res.json(err)
    })
@@ -53,15 +75,36 @@ module.exports = function (router, database) {
       });
   });
 
-  router.get("/shoes/products_by_id", (req, res) => {
-    const itemId = req.query.itemId
+  // router.get("/shoes/products_by_id", (req, res) => {
+  //   const itemId = req.query.itemId
 
-    getAllProductsFromShoes()
-   .then((products) => res.json({ product: products.filter(product => product.id === Number(itemId)) }))
+  //   getAllProductsFromShoes()
+  //  .then((products) => res.json({ product: products.filter(product => product.id === Number(itemId)) }))
+  //  .catch((err) => {
+  //    res.json(err)
+  //  })
+  // });
+
+  router.get("/shoes/:product_id", (req, res) => {
+    const productId = req.params.product_id
+    
+    getProductbyId(productId)
+   .then((product) => {
+      if(!product){
+        return res.json({ product: {}})
+      }
+      
+      getProductsFromSpecificSeller(product.user_id)
+      .then(otherProducts => {
+        res.json({ product, otherProducts })
+      })
+     
+    })
    .catch((err) => {
      res.json(err)
    })
   });
+
 
   // get all accessories
   router.get("/accessories", (req, res) => {
@@ -73,15 +116,37 @@ module.exports = function (router, database) {
       });
   });
 
-  router.get("/accessories/products_by_id", (req, res) => {
-    const itemId = req.query.itemId
+  // router.get("/accessories/products_by_id", (req, res) => {
+  //   const itemId = req.query.itemId
 
-   getAllProductsFromAccessories()
-   .then((products) => res.json({ product: products.filter(product => product.id === Number(itemId)) }))
+  //  getAllProductsFromAccessories()
+  //  .then((products) => res.json({ product: products.filter(product => product.id === Number(itemId)) }))
+  //  .catch((err) => {
+  //    res.json(err)
+  //  })
+  // });
+
+  router.get("/accessories/:product_id", (req, res) => {
+    const productId = req.params.product_id
+    
+    getProductbyId(productId)
+   .then((product) => {
+      if(!product){
+        return res.json({ product: {}})
+      }
+      
+      getProductsFromSpecificSeller(product.user_id)
+      .then(otherProducts => {
+    
+        res.json({ product, otherProducts })
+      })
+     
+    })
    .catch((err) => {
      res.json(err)
    })
   });
+
 
   // get all bags
   router.get("/bags", (req, res) => {
@@ -98,11 +163,31 @@ module.exports = function (router, database) {
       });
   });
 
-  router.get("/bags/products_by_id", (req, res) => {
-    const itemId = req.query.itemId
+  // router.get("/bags/products_by_id", (req, res) => {
+  //   const itemId = req.query.itemId
 
-    getAllProductsFromBags()
-   .then((products) => res.json({ product: products.filter(product => product.id === Number(itemId)) }))
+  //   getAllProductsFromBags()
+  //  .then((products) => res.json({ product: products.filter(product => product.id === Number(itemId)) }))
+  //  .catch((err) => {
+  //    res.json(err)
+  //  })
+  // });
+
+  router.get("/bags/:product_id", (req, res) => {
+    const productId = req.params.product_id
+    
+    getProductbyId(productId)
+   .then((product) => {
+      if(!product){
+        return res.json({ product: {}})
+      }
+      
+      getProductsFromSpecificSeller(product.user_id)
+      .then(otherProducts => {
+        res.json({ product, otherProducts })
+      })
+     
+    })
    .catch((err) => {
      res.json(err)
    })

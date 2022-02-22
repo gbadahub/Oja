@@ -5,7 +5,7 @@ import ArrowRightIcon from "./Icons/ArrowRight";
 export const Container = styled.div`
   position: relative;
   width: 50px;
-  height: 50px;
+  height: 25px;
   box-sizing: border-box;
   border-radius: 50px;
   border: 4px solid #393e46;
@@ -23,7 +23,7 @@ export const Container = styled.div`
       width: 50%;
       -webkit-box-shadow: 5px 5px 15px 5px rgba(0, 0, 0, 0.74);
       box-shadow: 5px 5px 15px 5px rgba(0, 0, 0, 0.74);
-      border: 4px solid #00adb5;
+      border: 4px solid #ba8759;
       @media (min-width: 768px) {
         width: 80%;
       }
@@ -35,11 +35,11 @@ export const SearchInput = styled.input`
   top: 0;
   left: 0;
   width: 100%;
-  height: 42px;
+  height: 22px;
   line-height: 30px;
   outline: 0;
   border: 0;
-  font-size: 2rem;
+  font-size: 1rem;
   border-radius: 20px;
   padding: 0 20px;
   margin: 0;
@@ -62,7 +62,7 @@ const fadeIn = keyframes`
 const IconCommonCss = css`
   height: 1.25rem;
   width: 1.25rem;
-  fill: #00adb5;
+  fill: #ba8759;
   z-index: 10;
   animation: ${fadeIn} 1s linear;
 `;
