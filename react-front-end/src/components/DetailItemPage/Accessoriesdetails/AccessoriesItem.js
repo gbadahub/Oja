@@ -5,19 +5,40 @@ import "./Accessories.css";
 
 function Accessories() {
   const [product, setProduct] = useState(null);
+  const [productPrice, setProductPrice] = useState(0);
+
   const [otherProducts, setOtherProducts] = useState([]);
   let { productId } = useParams();
+  const userId = localStorage.getItem('user_id');
+
+  const handleAddItemToOrderItems = (productId) => {
+    // update this function so that for each value selected for days it multiply the values * product.price (products table)
+    // create a seperate function that takes in the value(Days selected in the form) & multiplies by the product.price 
+    // make a post request using Query(UpdateOrdersItemsTableWithProductTotal) to update the product_total (order_items table)
+    console.log(productId);
+    Axios
+      .post(`http://localhost:8080/api/accessories/${productId}`, {userId: userId, productPrice: productPrice})
+      .then((response) => {
+        console.log(response);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+
   useEffect(() => {
     let productParams = productId
     Axios.get(`/api/accessories/${productParams}`)
       .then((res) => {
         setProduct(res.data.product);
+        setProductPrice(res.data.product.price);
         setOtherProducts(res.data.otherProducts);
       })
       .catch((err) => {
         console.log(err);
       });
   }, []);
+
 
   const handleChange = (e) => {
     const name = e.target.name;
@@ -86,7 +107,7 @@ function Accessories() {
                     <option value="tenDays">10 Days</option>
                   </select>
                 </section>
-                <button className="addtoCart"> Add to cart </button>
+                <button className="addtoCart" onClick={() => handleAddItemToOrderItems(productId)}> Add to cart </button>
               </section>
             </section>
           </div>

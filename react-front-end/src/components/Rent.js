@@ -32,8 +32,9 @@ function Rent({ loginAuth, setLoginAuth }) {
     price: "",
     catId: 0
   });
+
   const handleSelectorChange = (e) => {
-    console.log('Selectorchange:', e.target.value);
+    console.log('SelectorChange:', e.target.value);
     setFormDetails({ ...formDetails, catId: e.target.value });
   };
 
@@ -98,20 +99,16 @@ function Rent({ loginAuth, setLoginAuth }) {
           console.log(error);
         });
     }
+    setFormDetails({
+      img: "",
+      title: "",
+      description: "",
+      price: "",
+      catId: 0
+    });
+    setImageSelected("");
   };
-  // axios
-  //           .get("http://localhost:8080/api/rent", {
-  //             headers: {
-  //               'userid': userId
-  //             }
-  //           })
-  //           .then((response) => {
-  //             console.log(response);
-  //             // setOtherListing(response.data.products)
-  //           })
-  //           .catch((error) => {
-  //             console.log(error);
-  //           })
+
 
   useEffect(() => {
     axios
@@ -198,12 +195,6 @@ function Rent({ loginAuth, setLoginAuth }) {
       </form>
       <h2> Review Other Listings</h2>
       <div className="review-listing">
-        {/* create endpoint that takes in user_id, append at the end of the array
-            get call to db using user_id to get items bring back []
-            form details get populated and u post 
-            append to the list the form details that u made and display
-            onClick we want to remove the listing from display and change is_avaliable to true 
-            */}
         {otherListings.map((otherListing) => {
           return (
             <div className="review-listing-1" key={otherListing.id}>
@@ -211,9 +202,7 @@ function Rent({ loginAuth, setLoginAuth }) {
               <button type="button" onClick={() => handleUnlistItem(otherListing.id)}> Remove </button> </span>
             </div>
           )
-        })
-        }
-
+        })}
       </div>
     </>
   );

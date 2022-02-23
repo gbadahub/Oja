@@ -84,27 +84,54 @@ const removeItemForSale = function (product_id) {
 }
 
 
-// add order to orders table 
-
-const appendOrdersTableWithUserId = function (orders) {
+// update orders table for price => 
+ 
+const UpdateOrdersTableWithTotalPrice = function (total_price_cents, orderId) {
   return db_oja_connection
-    .query(`INSERT INTO orders (user_id, created_at, total_price_cents)
-  VALUES ($1, $2, $3)
-  RETURNING id;`, [orders.user_id, orders.created_at, orders.total_price_cents])
+    .query(`INSERT INTO orders (total_price_cents)
+  VALUES ($1*100)
+  WHERE id = $2
+  RETURNING id;`, [total_price_cents, orderId])
     .then(res => res.rows[0])
     .catch((err) => {
       console.log(err.message);
     });
 }
 
+// update product_total for order_items table  => 
+ 
+const UpdateOrdersItemsTableWithProductTotal = function (product_total, orderId) {
+  return db_oja_connection
+    .query(`INSERT INTO order_items (product_total)
+  VALUES ($1)
+  Where order_id = $2
+  RETURNING id;`, [product_total, orderId])
+    .then(res => res.rows[0])
+    .catch((err) => {
+      console.log(err.message);
+    });
+}
+
+// create initial order id 
+
+const createOrdersTableWithUserId = function (user_id) {
+  return db_oja_connection
+    .query(`INSERT INTO orders (user_id)
+  VALUES ($1)
+  RETURNING id;`, [user_id])
+    .then(res => res.rows[0])
+    .catch((err) => {
+      console.log(err.message);
+    });
+}
 
 // add an order_item to order_item table 
 
-const appendOrdersItemsTableWithCurrentOrder = function (order_items) {
+const appendOrdersItemsTableWithCurrentOrder = function (productId, orderId, productTotal) {
   return db_oja_connection
     .query(`INSERT INTO order_items (product_id, order_id, product_total)
   VALUES ($1, $2, $3)
-  RETURNING order_id;`, [order_items.product_id, order_items.order_id, order_items.product_total])
+  RETURNING order_id;`, [productId, orderId, productTotal])
     .then(res => res.rows[0])
     .catch((err) => {
       console.log(err.message);
@@ -117,8 +144,6 @@ const appendOrdersItemsTableWithCurrentOrder = function (order_items) {
 const getOrdersFromUser = function (userId) {
   return db_oja_connection
   .query(`SELECT * FROM orders
-  JOIN order_items ON orders.id = order_id
-  JOIN products ON product.id = order_items.product_id
   WHERE user_id = $1;`, [userId])
     .then(orderData => orderData.rows)
     .catch((err) => {
@@ -127,19 +152,29 @@ const getOrdersFromUser = function (userId) {
 };
 
 
-
-// get total for the purchase/cart using userID
-
-const getCheckoutPage = function (userId) {
+const getMostRecentOrderFromUser = function () {
   return db_oja_connection
-  .query(`SELECT order_id, total_price_cents as total,
-  products.name as item, products.product_total as unit_price, products.img, users.first_name as customer
+  .query(`SELECT * FROM orders 
+  Order By id DESC Limit 1;`)
+    .then(orderData => orderData.rows)
+    .catch((err) => {
+      console.log(err.message);
+    });
+};
+
+
+
+// get total for the purchase/cart using orderID
+const getCheckoutPage = function (orderId) {
+  return db_oja_connection
+  .query(`SELECT order_id, (total_price_cents/100) as total,
+  products.name as item, products.product_total as PricePerNight, products.img, users.first_name as customer
   FROM order_items
   JOIN orders ON orders.id = order_id
   JOIN products ON products.id = order_items.products_id
   JOIN users ON users.id = user_id
-  WHERE users.id = $1;
-  `, [userId])
+  WHERE order.id = $1;
+  `, [orderId])
     .then(res => res.rows[0])
     .catch((err) => {
       console.log(err.message);
@@ -178,7 +213,7 @@ const getAllProductsUsingSearchBar = function (options, limit = 20)  {
 
   // 3b get products using product name
 
-  // figure out howo ot correectly reference products_name to render search 
+  // figure out how to correctly reference products_name to render search 
   console.log("product_name", options)
   if (options.product_name) {
     queryParams.push(`%${options.product_name}%`);
@@ -311,36 +346,20 @@ const getAllProductsFromAccessories = function (limit = 20) {
 }
 
 
-// get cart items
-const getCartInfoForUser = function (user_id, order_id) {
+// get cart items to display on cart 
+const getCartInfoForUser = function (order_id) {
   return db_oja_connection
     .query(`Select products.name As name,
-    (products.price/100) As price, products.user_id As user_id, order_items.order_id As order_id,
-    (orders.total_price_cents/100) As cartTotal,
-    orders.created_at As placed_at From products
+    (products.price/100) As price, products.img As productImage, order_items.order_id As order_id,
+    orders.created_at As placed_at, order_items.product_total As PricePerNight From products
     Join order_items on order_items.product_id = products.id
     Join orders on orders.id = order_items.order_id
-    Where products.user_id = $1 And order_items.order_id = $2
-    Order By order_items.order_id;`, [user_id, order_id])
+    Where order_items.order_id = $1`, [order_id])
     .then((result) => result.rows)
     .catch((err) => {
       console.log(err.message);
     });
 }
-
-// FIX THIS getCartInforForUSER QUERY 
-// need to create function to update total price in orders table 
-
-
-//simpler to have sql written in database.js functions
-
-// all the info needed to connect to db 
-// and a function that starts a connection to db
-
-//export function 
-
-
-// split the functions based on relevant information. 
 
 
 module.exports = {
@@ -360,8 +379,11 @@ module.exports = {
   getProductbyId,
   addUser, 
   addItemForSale, 
-  appendOrdersTableWithUserId,
   appendOrdersItemsTableWithCurrentOrder, 
   removeItemForSale, 
-  markItemAsRented
+  markItemAsRented, 
+  createOrdersTableWithUserId, 
+  getMostRecentOrderFromUser, 
+  UpdateOrdersTableWithTotalPrice, 
+  UpdateOrdersItemsTableWithProductTotal
 }
