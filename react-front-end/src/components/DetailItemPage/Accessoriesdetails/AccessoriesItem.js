@@ -93,11 +93,14 @@ function Accessories() {
           <h3 className="More"> More From User </h3>
           <div className="moreFromUser">
             {otherProducts.map((otherProduct) => (
+              <div className="moreFromUser-img">
               <img
                 src={otherProduct.img}
                 className="otherProduct-img"
                 alt="Accessory"
+                
               />
+              </div>
             ))}
           </div>
         </div>

@@ -57,34 +57,44 @@ function Home() {
         <ImageSlider slides={SlideData} />
       </h1>
       <div className="home-container">
+      
       {feature && (
+        
         <div className="home-picks">
           Editor's Pick
           <div>
             {" "}
              <img src={feature[1].img} style={{ width: 400 }} />
           </div>
+
         </div>
+        
       )}
 
       {newAdded && (
+        
         <div className="home-picks">
           Newly Added
           <div>
             <img src={newAdded[4].img} style={{ width: 400 }} />
           </div>
         </div>
+        
       )}
       {popular && (
+        
         <div className="home-picks">
           Popular Now!
           <div>
             {" "}
             <img src={popular[1].img} style={{ width: 400 }} />
           </div>
+          
         </div>
+        
       )}
       </div>
+      
     </>
     
   );

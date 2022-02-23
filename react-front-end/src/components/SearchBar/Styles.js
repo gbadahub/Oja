@@ -14,8 +14,8 @@ export const Container = styled.div`
   transition: all 0.5s;
   flex: 1 1 50%;
   display: flex;
-  justify-content: center;
-  align-items: center;
+  justify-content: start;
+  align-items: start;
   flex-direction: column;
   ${({ hover }) =>
     hover &&
