@@ -1,6 +1,4 @@
 import React, { useState, useEffect } from "react";
-import StripeCheckout from "react-stripe-checkout";
-// stripe checkout 
 import axios from "axios";
 
 
