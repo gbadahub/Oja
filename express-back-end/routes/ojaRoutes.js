@@ -17,7 +17,8 @@ const {
   getProductsFromSpecificSeller,
   createOrdersTableWithUserId,
   appendOrdersItemsTableWithCurrentOrder,
-  getMostRecentOrderFromUser
+  getMostRecentOrderFromUser,
+  searchProduct
 } = require("../database");
 
 module.exports = function (router, database) {
@@ -359,6 +360,19 @@ module.exports = function (router, database) {
         res.send(e);
       });
   });
+
+
+  router.post("/abc", (req,res)=>{
+    const searchInput = req.body.search
+    searchProduct(searchInput)
+    .then((products) => {
+      res.send(products);
+    })
+    .catch((e) => {
+      console.error(e);
+      res.send(e);
+    });
+  })
 
 
   return router;

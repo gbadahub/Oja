@@ -15,6 +15,7 @@ import ClothingItemPage from "./components/DetailItemPage/Clothingdetail/Clothin
 import Accessories from "./components/categories/Accessories";
 import AccessoriesItemPage from "./components/DetailItemPage/Accessoriesdetails/AccessoriesItem";
 import Cart from "./components/Cart";
+
 import { Route, Routes } from "react-router-dom";
 
 
