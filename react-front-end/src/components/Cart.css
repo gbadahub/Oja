@@ -1,0 +1,39 @@
+*{
+  box-sizing: border-box;
+}
+
+.checkout-container{
+height: 400px;
+overflow-y: auto;
+}
+
+.cartItem{
+  display: flex;
+  flex: 1;
+  margin: 0 auto;
+  width: 800px;
+}
+
+.checkoutIMG {
+  width: 400px;
+  height: 400px;
+  margin-bottom: 20px;
+}
+
+.checkoutInfo{
+  width: 400px;
+}
+
+.product-img{
+  height: 100%;
+}
+
+.checkout-submit{
+  display: block;
+  margin: 0 auto;
+  padding: 15px;
+  border-radius: 5px;
+  border: none;
+  background-color: bisque;
+  color: rgb(180, 121, 10);
+}

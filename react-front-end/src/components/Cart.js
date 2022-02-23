@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+import "./Cart.css"
 
 
 // 1- send the data from the backend to the cart using get so it can be looped through 
@@ -53,17 +54,37 @@ function Cart() {
 
   // SHOULD DISPLAY PRODUCT IMAGE, PRODUCTTOTAL FOR RENTED NUMBER OF DAYS, PRODUCT NAME, CART TOTAL, TAXES 0.13% 
   return (
-    <div className="cart-container">
-      Cart
-      <div className="cart-img"></div>
+    <>
+    <div className="checkout-container">
+      
       {cartItems.map((item) => {
         return (
-      <div className="cartItem">{item.name}</div>
+          
+      <div className="cartItem">
+        <section class="checkoutIMG">
+      <img
+                src={item.productimage}
+                className="product-img"
+                alt="Accessory"
+                
+              />
+      </section>
+        
+        <section class="checkoutInfo"> 
+      <p> {item.name} </p>
+      <p> ${item.price} </p>
+      </section> 
+
+      
+      </div>
       )})}
-      <button type="submit" onClick={() => handleSubmitOrder(userId)}> Submit Order</button>
+      
       <h4> </h4> 
       <h4> </h4>
     </div>
+
+    <button className="checkout-submit" type="submit" onClick={() => handleSubmitOrder(userId)}> Submit Order</button>
+    </>
   );
 }
 
