@@ -238,7 +238,7 @@ module.exports = function (router, database) {
   });
 
 
-  router.get("/cart", (req, res) => {
+  router.get("/cart", async (req, res) => {
     // console.log("test", req.session)
     console.log('req.params.userId:', req.query['userId']);
 
@@ -251,27 +251,9 @@ module.exports = function (router, database) {
       return;
     }
     // needs to get the most recent order created by the user when they click add to cart
-    getMostRecentOrderFromUser()
-      .then((response) => {
-        // console.log('res311:', res);
-        const orderIdFromRecentOrder = response[0].id;
-        console.log('orderID:', orderIdFromRecentOrder);
-        console.log('userId:', userid);
-        // get the cart Info using orderId => product name, unit price, product total(price*night), img 
-        getCartInfoForUser(orderIdFromRecentOrder)
-          .then((res) => res.send({orders}))
-          .catch((e) => {
-            console.error(e);
-            res.json(e);
-          })
-        console.log(res)
-      })
-      .catch((e) => {
-        console.error(e);
-        res.json(e);
-      })
-
-
+    const mostRecentOrderId = (await getMostRecentOrderFromUser())[0].id
+    const orders = await getCartInfoForUser(mostRecentOrderId)
+    res.send({orders})
   });
 
 
