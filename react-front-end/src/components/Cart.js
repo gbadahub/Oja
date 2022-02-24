@@ -89,7 +89,9 @@ function Cart() {
       </div>
       
       )})}
-      <div className='cartTotal'></div>
+      <div className='cartTotal'>Cart total
+      <p>----</p>
+      </div>
       <button className="checkout-submit" type="submit" onClick={() => handleSubmitOrder(userId)}> Submit Order</button>
     </div>
 
