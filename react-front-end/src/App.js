@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import "./App.css";
 import Navbar from "./components/Navbar/Navbar";
+import Search from "./components/SearchBar/Search";
 import Register from "./components/Register";
 import Login from "./components/Login";
 import Home from "./components/Home";
@@ -13,6 +14,7 @@ import Clothing from "./components/categories/Clothing";
 import ClothingItemPage from "./components/DetailItemPage/Clothingdetail/ClothingItem"
 import Accessories from "./components/categories/Accessories";
 import AccessoriesItemPage from "./components/DetailItemPage/Accessoriesdetails/AccessoriesItem";
+import Cart from "./components/Cart";
 
 import { Route, Routes } from "react-router-dom";
 
@@ -25,6 +27,11 @@ function App() {
   return (
     <main className="App">
       <Navbar isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} loginAuth={loginAuth} setLoginAuth={setLoginAuth}/>
+
+      <Routes>
+        <Route path="/cart" element={<Cart />}></Route>
+      </Routes>
+
       <Routes>
         <Route path="/bags" element={<Bags />}></Route>
       </Routes>
@@ -73,6 +80,10 @@ function App() {
 
       <Routes>
         <Route path="/homepage" element={<Home />}></Route>
+      </Routes>
+
+      <Routes>
+        <Route path="/search:query" element={<Home />}></Route>
       </Routes>
     </main>
   );

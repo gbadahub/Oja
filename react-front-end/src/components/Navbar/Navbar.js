@@ -63,7 +63,7 @@ function Navbar({loginAuth, setLoginAuth, isLoggedIn, setIsLoggedIn}) {
             <li>
             <Link to="/register" className="nav-top-list">Register</Link>
           </li>
-          <li>Cart</li>
+          <li><Link to="/cart" className="nav-top-list">Cart</Link></li>
         </ul>
       </div>
 

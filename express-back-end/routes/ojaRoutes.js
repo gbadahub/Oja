@@ -6,20 +6,24 @@ const {
   getAllProductsFromBags,
   getCartInfoForUser,
   getCheckoutPage,
-  appendOrdersTableWithUserId,
+  UpdateOrdersTableWithTotalPrice, 
+  UpdateOrdersItemsTableWithProductTotal,
   getAllProductsUsingSearchBar,
   getOrdersFromUser,
   addItemForSale,
-  getRelatedProductsFromUser, 
+  getRelatedProductsFromUser,
   removeItemForSale,
   getProductbyId,
   getProductsFromSpecificSeller,
+  createOrdersTableWithUserId,
+  appendOrdersItemsTableWithCurrentOrder,
+  getMostRecentOrderFromUser,
   searchProduct
 } = require("../database");
 
 module.exports = function (router, database) {
 
-  // get all products
+  // get all the product for the homepage to display the editor's pick etc. 
   router.get("/homepage", (req, res) => {
     getAllProductsForHomepage()
       .then((products) => res.json({ products }))
@@ -29,7 +33,7 @@ module.exports = function (router, database) {
       });
   });
 
-  // get all clothing
+  // get all clothing from the db
   router.get("/clothing", (req, res) => {
     getAllProductsFromClothing(30)
       .then((products) => res.json({ products }))
@@ -39,36 +43,27 @@ module.exports = function (router, database) {
       });
   });
 
-  // router.get("/clothing/products_by_id", (req, res) => {
-  //   const itemId = req.query.itemId
-
-  //   getAllProductsFromClothing()
-  //  .then((products) => res.json({product: products.filter(product => product.id === Number(itemId)) }))
-  //  .catch((err) => {
-  //    res.json(err)
-  //  })
-  // });
-
+  // get a specific clothing item 
   router.get("/clothing/:product_id", (req, res) => {
     const productId = req.params.product_id
     getProductbyId(productId)
-   .then((product) => {
-      if(!product){
-        return res.json({ product: {}})
-      }
-      
-      getProductsFromSpecificSeller(product.user_id)
-      .then(otherProducts => {
-        res.json({ product, otherProducts })
+      .then((product) => {
+        if (!product) {
+          return res.json({ product: {} })
+        }
+
+        getProductsFromSpecificSeller(product.user_id)
+          .then(otherProducts => {
+            res.json({ product, otherProducts })
+          })
+
       })
-     
-    })
-   .catch((err) => {
-     res.json(err)
-   })
+      .catch((err) => {
+        res.json(err)
+      })
   });
 
-  // get all shoes
+  // get all shoes from the db
   router.get("/shoes", (req, res) => {
     getAllProductsFromShoes(30)
       .then((products) => res.json({ products }))
@@ -78,34 +73,25 @@ module.exports = function (router, database) {
       });
   });
 
-  // router.get("/shoes/products_by_id", (req, res) => {
-  //   const itemId = req.query.itemId
-
-  //   getAllProductsFromShoes()
-  //  .then((products) => res.json({ product: products.filter(product => product.id === Number(itemId)) }))
-  //  .catch((err) => {
-  //    res.json(err)
-  //  })
-  // });
-
+  // get the specific shoe item
   router.get("/shoes/:product_id", (req, res) => {
     const productId = req.params.product_id
-    
+
     getProductbyId(productId)
-   .then((product) => {
-      if(!product){
-        return res.json({ product: {}})
-      }
-      
-      getProductsFromSpecificSeller(product.user_id)
-      .then(otherProducts => {
-        res.json({ product, otherProducts })
+      .then((product) => {
+        if (!product) {
+          return res.json({ product: {} })
+        }
+
+        getProductsFromSpecificSeller(product.user_id)
+          .then(otherProducts => {
+            res.json({ product, otherProducts })
+          })
+
       })
-     
-    })
-   .catch((err) => {
-     res.json(err)
-   })
+      .catch((err) => {
+        res.json(err)
+      })
   });
 
 
@@ -119,36 +105,85 @@ module.exports = function (router, database) {
       });
   });
 
-  // router.get("/accessories/products_by_id", (req, res) => {
-  //   const itemId = req.query.itemId
-
-  //  getAllProductsFromAccessories()
-  //  .then((products) => res.json({ product: products.filter(product => product.id === Number(itemId)) }))
-  //  .catch((err) => {
-  //    res.json(err)
-  //  })
-  // });
-
+  // get specific item for accessories 
   router.get("/accessories/:product_id", (req, res) => {
     const productId = req.params.product_id
-    
+
     getProductbyId(productId)
-   .then((product) => {
-      if(!product){
-        return res.json({ product: {}})
-      }
-      
-      getProductsFromSpecificSeller(product.user_id)
-      .then(otherProducts => {
-    
-        res.json({ product, otherProducts })
+      .then((product) => {
+        if (!product) {
+          return res.json({ product: {} })
+        }
+
+        getProductsFromSpecificSeller(product.user_id)
+          .then(otherProducts => {
+
+            res.json({ product, otherProducts })
+          })
+
       })
-     
-    })
-   .catch((err) => {
-     res.json(err)
-   })
+      .catch((err) => {
+        res.json(err)
+      })
   });
+
+  // firtly verify the user annd have user id 
+  // then i will create an order with it 
+  // then I will append the othersItems table with product id, newly generate order id and product total 
+
+  router.post("/accessories/:product_id", (req, res) => {
+    const productId = req.params.product_id
+    const userid = req.body.userId
+    const productPrice = req.body.productPrice
+    // get the order_id
+
+    // const orderId = res.data.orderId;
+
+    if (!userid) {
+      res.send("💩");
+      return;
+    }
+    // only creates a new order when an order doesn't exist 
+    getMostRecentOrderFromUser()
+      .then((res) => {
+        // console.log('res175:', res);
+        const orderIdFromRecentOrder = res[0].id;
+
+        if (orderIdFromRecentOrder) {
+          // console.log('CorrectIdPerhapsss:', orderIdFromRecentOrder);
+          appendOrdersItemsTableWithCurrentOrder(productId, orderIdFromRecentOrder, productPrice)
+            .then(res => console.log(res))
+            .catch((err) => {
+              res.json(err)
+            })
+        }
+        else {
+          createOrdersTableWithUserId(userid)
+            .then((res) => {
+              console.log(userid);
+              // console.log('resdata:', res);
+              const orderId = res.id;
+              // console.log("productId:", productId);
+              // console.log("orderId:", orderId);
+              // console.log("productTotal:", productPrice);
+              appendOrdersItemsTableWithCurrentOrder(productId, orderId, productPrice)
+                .then(res => console.log(res))
+                .catch((err) => {
+                  res.json(err)
+                })
+              console.log(res);
+            })
+            .catch((err) => {
+              res.json(err)
+            })
+        }
+        console.log(res)
+      })
+      .catch((err) => {
+        res.json(err)
+      })
+  });
+
 
 
   // get all bags
@@ -156,7 +191,7 @@ module.exports = function (router, database) {
     getAllProductsFromBags(30)
       .then((products) => {
         // console.log('regsession:', JSON.stringify(req.session, null, 2))  
-        
+
         res.json({ products });
       })
 
@@ -166,35 +201,26 @@ module.exports = function (router, database) {
       });
   });
 
-  // router.get("/bags/products_by_id", (req, res) => {
-  //   const itemId = req.query.itemId
-
-  //   getAllProductsFromBags()
-  //  .then((products) => res.json({ product: products.filter(product => product.id === Number(itemId)) }))
-  //  .catch((err) => {
-  //    res.json(err)
-  //  })
-  // });
-
+  // get each specific bag 
   router.get("/bags/:product_id", (req, res) => {
     const productId = req.params.product_id
-    
+
     getProductbyId(productId)
-   .then((product) => {
-      if(!product){
-        return res.json({ product: {}})
-      }
-      
-      getProductsFromSpecificSeller(product.user_id)
-      .then(otherProducts => {
-        res.json({ product, otherProducts })
+      .then((product) => {
+        if (!product) {
+          return res.json({ product: {} })
+        }
+
+        getProductsFromSpecificSeller(product.user_id)
+          .then(otherProducts => {
+            res.json({ product, otherProducts })
+          })
       })
-     
-    })
-   .catch((err) => {
-     res.json(err)
-   })
+      .catch((err) => {
+        res.json(err)
+      })
   });
+
 
   // get checkoutpage/ summary page logged in only
   router.get("/orderSummary", (req, res) => {
@@ -211,35 +237,37 @@ module.exports = function (router, database) {
       });
   });
 
-  // get items in cart logged in only
-  // AM I GETTING THE RIGHT CART INFORMATION uing orderID?????
-  router.get("/cart", (req, res) => {
-    console.log("test", req.session)
-    const userid = req.headers.userid;
-    const orderId = req.session.orderId;
+
+  router.get("/cart", async (req, res) => {
+    // console.log("test", req.session)
+    console.log('req.params.userId:', req.query['userId']);
+
+    const userid = req.query['userId'];
+    // const orderId = req.session.orderId;
+    // const orderId = res.id;
+
     if (!userid) {
       res.send("💩");
       return;
     }
-    getCartInfoForUser(userId, orderId)
-      .then((orders) => res.json({ orders }))
-      .catch((e) => {
-        console.error(e);
-        res.json(e);
-      });
+    // needs to get the most recent order created by the user when they click add to cart
+    const mostRecentOrderId = (await getMostRecentOrderFromUser())[0].id
+    const orders = await getCartInfoForUser(mostRecentOrderId)
+    res.send({orders})
   });
 
-  // post items to order_items logged in only
 
-  // AM I DOING THE POSTING CORRECTLY? THE FUNCTION REQUIRES ORDERS INTO
-  // WILL REQ>BODY GIVE ME THAT?
   router.post("/cart", (req, res) => {
-    const userId = req.session.userId;
-    appendOrdersTableWithUserId({ ...req.body, owner_id: userId })
+    const userid = req.headers.userid;
+    const orderId = res.id;
+    // needs to take in total_price
+
+    // 1 - needs to update totalprice when clicking submit 
+    UpdateOrdersTableWithTotalPrice({ orderId })
       .then((orders) => {
         res.json(orders);
-        const params = JSON.stringify({ owner_id: userId });
-        res.redirect("/cart_two/?", params);
+        // const params = JSON.stringify({ owner_id: userid });
+        // res.redirect("/cart_two/?", params);
       })
       .catch((e) => {
         console.error(e);
@@ -247,32 +275,9 @@ module.exports = function (router, database) {
       });
   });
 
-  //   app.get('/category', function(req, res) {
-  //     const query = querystring.stringify({
-  //         "a": 1,
-  //         "b": 2,
-  //         "valid":"your string here"
-  //     });
-  //     res.redirect('/?' + query);
-  // });
-
-  // post items to orders logged in only
-  router.post("/cart_two/:id", (req, res) => {
-    console.log(req.params);
-    // const userId = req.session.userId;
-    // appendOrdersItemsTableWithCurrentOrder({...req.body, owner_id: userId})
-    //   .then(orders => {
-    //     res.send(orders);
-    //   })
-    //   .catch(e => {
-    //     console.error(e);
-    //     res.send(e)
-    //   });
-  });
-
-  // do I need to make a seperate route for search bar results?
 
   router.get("/search", (req, res) => {
+    // const productI = req.params.productId;
     getAllProductsUsingSearchBar(req.query, 20)
       .then((products) => res.send({ products }))
       .catch((e) => {
@@ -302,7 +307,7 @@ module.exports = function (router, database) {
   router.post("/rent", (req, res) => {
     // console.log('Req Headers:', req.headers);
     const userid = req.headers.userid;
-    console.log("rent", userid)
+    // console.log("rent", userid)
     addItemForSale({ ...req.body, owner_id: userid })
       .then((products) => {
         res.send(products);
@@ -324,11 +329,11 @@ module.exports = function (router, database) {
         res.send(e);
       });
   });
-  
+
   router.post("/rent/:productId", (req, res) => {
     // console.log('Req Headers:', req.headers);
     const productId = req.params.productId;
-    removeItemForSale( productId )
+    removeItemForSale(productId)
       .then((products) => {
         res.send(products);
       })
