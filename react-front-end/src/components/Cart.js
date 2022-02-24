@@ -58,9 +58,9 @@ function Cart() {
     <div className="checkout-container">
       <h1 className="title"> CHECKOUT</h1>
       <div className="ItemTitle">
-      <h3> image </h3>
-      <h3> product Name </h3>
-      <h3> Product Price </h3>
+      <h3> IMAGE </h3>
+      <h3> NAME  </h3>
+      <h3> UNIT PRICE/NIGHT </h3>
       </div>
       {cartItems.map((item) => {
         return (
@@ -77,13 +77,15 @@ function Cart() {
         
         <div class="checkoutInfo"> 
       <p> {item.name} </p>
-      <p> ${item.price} </p>
-      </div> 
+      </div>
+      <div class="checkoutInfo">
+      <p> ${item.price} X 7 Days</p>
+        </div> 
 
       
       </div>
       )})}
-      
+      <div className='cartTotal'></div>
       <button className="checkout-submit" type="submit" onClick={() => handleSubmitOrder(userId)}> Submit Order</button>
     </div>
 
