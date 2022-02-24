@@ -68,6 +68,7 @@ function Cart() {
                 alt="Accessory"
                 
               />
+              <p>Blue is heaven</p>
       </section>
         
         <section class="checkoutInfo"> 
