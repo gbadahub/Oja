@@ -56,35 +56,37 @@ function Cart() {
   return (
     <>
     <div className="checkout-container">
-      
+      <h1 className="title"> CHECKOUT</h1>
+      <div className="ItemTitle">
+      <h3> image </h3>
+      <h3> product Name </h3>
+      <h3> Product Price </h3>
+      </div>
       {cartItems.map((item) => {
         return (
           
       <div className="cartItem">
-        <section class="checkoutIMG">
+        <div class="checkoutIMG">
       <img
                 src={item.productimage}
                 className="product-img"
                 alt="Accessory"
                 
               />
-              <p>Blue is heaven</p>
-      </section>
+      </div>
         
-        <section class="checkoutInfo"> 
+        <div class="checkoutInfo"> 
       <p> {item.name} </p>
       <p> ${item.price} </p>
-      </section> 
+      </div> 
 
       
       </div>
       )})}
       
-      <h4> </h4> 
-      <h4> </h4>
+      <button className="checkout-submit" type="submit" onClick={() => handleSubmitOrder(userId)}> Submit Order</button>
     </div>
 
-    <button className="checkout-submit" type="submit" onClick={() => handleSubmitOrder(userId)}> Submit Order</button>
     </>
   );
 }
