@@ -80,18 +80,20 @@ function Cart() {
       <p> {item.name} </p>
       </div>
       <div class="checkoutInfo">
-      <p> ${item.price}</p>
+      <p> ${item.price} X 7 Days</p>
         </div> 
         <div class="checkoutInfo">
       <p> ${item.pricepernight*7}</p>
         </div>
 
       </div>
-      
       )})}
-      <div className='cartTotal'>Cart total
-      <p>----</p>
+      
+      <div className='cartTotal'> 
+      <p></p>
+      
       </div>
+      
       <button className="checkout-submit" type="submit" onClick={() => handleSubmitOrder(userId)}> Submit Order</button>
     </div>
 

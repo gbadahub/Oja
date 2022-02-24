@@ -8,14 +8,8 @@ VALUES
  ', true, 4, 3),
  ('Tiffany Tiara', 10000, 'https://i.pinimg.com/564x/2d/e9/7e/2de97eca751fbac8fdac14a514d036ee.jpg', '-Made with swarovski
  -24K Gold', true, 4, 1),
-('Metal Double G brooch with crystals', 1000, 'https://i.pinimg.com/474x/49/a2/8a/49a28a638650fd4815f17790cc82cec3.jpg', '-Double G detail
- -Made in Italy
- ', true, 4, 3),
  ('Snake Ring', 10000, 'https://i.pinimg.com/474x/c5/a8/c7/c5a8c7225a37c7be58d7bed5e7bec7dc.jpg', '
  -24K Gold', true, 4, 6),
-('Metal Double G brooch with crystals', 1000, 'https://i.pinimg.com/474x/49/a2/8a/49a28a638650fd4815f17790cc82cec3.jpg', '-Double G detail
- -Made in Italy
- ', true, 4, 3),
 ('Christian Dior Belt', 4000, 'https://media.dior.com/couture/ecommerce/media/catalog/product/d/e/1634582210_B0077UVWV_M900_E01_ZH.jpg', '-Black -Leather -100% Smooth Calfskin -Shiny gold-finish', true, 4, 3),
 ('Armani Watch', 3000, 'https://i.pinimg.com/474x/21/24/33/212433e03eb8fcb4b9101756c022c51e.jpg', '-Gold
 -With Crystals

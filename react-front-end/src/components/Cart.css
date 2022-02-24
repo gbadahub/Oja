@@ -8,15 +8,14 @@ display: flex;
 flex-direction: column;
 justify-content: flex-start;
 gap: 1em;
-padding-left: 5em;
-padding-right: 5em;
+padding: 2em 5em 0 5em;
 }
 
 .cartItem{
   border: 1px solid black;
   border-radius: 20px;
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(4, 1fr);
   grid-gap: 7em
 
   /* margin: 0 auto; */
@@ -52,7 +51,7 @@ padding-right: 5em;
 
 div.ItemTitle {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(4, 1fr);
 }
 
 .checkoutInfo p{
@@ -78,6 +77,7 @@ img.product-img {
   padding: 15px;
   border-radius: 5px;
   border: none;
-  background-color: bisque;
-  color: rgb(180, 121, 10);
+  background-color: #343d46;
+  color: white;
+  font-size: 1.5em;
 }
