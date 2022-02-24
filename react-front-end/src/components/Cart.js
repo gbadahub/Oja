@@ -60,7 +60,8 @@ function Cart() {
       <div className="ItemTitle">
       <h3> IMAGE </h3>
       <h3> NAME  </h3>
-      <h3> UNIT PRICE/NIGHT </h3>
+      <h3> UNIT PRICE/NIGHT</h3>
+      <h3> TOTAL </h3>
       </div>
       {cartItems.map((item) => {
         return (
@@ -79,11 +80,14 @@ function Cart() {
       <p> {item.name} </p>
       </div>
       <div class="checkoutInfo">
-      <p> ${item.price} X 7 Days</p>
+      <p> ${item.price}</p>
         </div> 
+        <div class="checkoutInfo">
+      <p> ${item.pricepernight*7}</p>
+        </div>
 
-      
       </div>
+      
       )})}
       <div className='cartTotal'></div>
       <button className="checkout-submit" type="submit" onClick={() => handleSubmitOrder(userId)}> Submit Order</button>

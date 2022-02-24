@@ -253,6 +253,7 @@ module.exports = function (router, database) {
     // needs to get the most recent order created by the user when they click add to cart
     const mostRecentOrderId = (await getMostRecentOrderFromUser())[0].id
     const orders = await getCartInfoForUser(mostRecentOrderId)
+    console.log('orders:', orders); 
     res.send({orders})
   });
 

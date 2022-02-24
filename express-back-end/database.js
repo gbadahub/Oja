@@ -390,7 +390,7 @@ const getCartInfoForUser = function (order_id) {
   return db_oja_connection
     .query(`Select products.name As name,
     (products.price/100) As price, products.img As productImage, order_items.order_id As order_id,
-    orders.created_at As placed_at, order_items.product_total As PricePerNight From products
+    orders.created_at As placed_at, (order_items.product_total/100) As PricePerNight From products
     Join order_items on order_items.product_id = products.id
     Join orders on orders.id = order_items.order_id
     Where order_items.order_id = $1`, [order_id])
