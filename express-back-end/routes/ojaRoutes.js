@@ -62,6 +62,59 @@ module.exports = function (router, database) {
         res.json(err)
       })
   });
+  router.post("/clothing/:product_id", (req, res) => {
+    const productId = req.params.product_id
+    const userid = req.body.userId
+    const productPrice = req.body.productPrice
+    // get the order_id
+
+    // const orderId = res.data.orderId;
+
+    if (!userid) {
+      res.send("💩");
+      return;
+    }
+    // only creates a new order when an order doesn't exist 
+    getMostRecentOrderFromUser()
+      .then((res) => {
+        // console.log('res175:', res);
+        const orderIdFromRecentOrder = res[0].id;
+
+        if (orderIdFromRecentOrder) {
+          // console.log('CorrectIdPerhapsss:', orderIdFromRecentOrder);
+          appendOrdersItemsTableWithCurrentOrder(productId, orderIdFromRecentOrder, productPrice)
+            .then(res => console.log(res))
+            .catch((err) => {
+              res.json(err)
+            })
+        }
+        else {
+          createOrdersTableWithUserId(userid)
+            .then((res) => {
+              console.log(userid);
+              // console.log('resdata:', res);
+              const orderId = res.id;
+              // console.log("productId:", productId);
+              // console.log("orderId:", orderId);
+              // console.log("productTotal:", productPrice);
+              appendOrdersItemsTableWithCurrentOrder(productId, orderId, productPrice)
+                .then(res => console.log(res))
+                .catch((err) => {
+                  res.json(err)
+                })
+              console.log(res);
+            })
+            .catch((err) => {
+              res.json(err)
+            })
+        }
+        console.log(res)
+      })
+      .catch((err) => {
+        res.json(err)
+      })
+  });
+
 
   // get all shoes from the db
   router.get("/shoes", (req, res) => {
@@ -72,6 +125,60 @@ module.exports = function (router, database) {
         res.json(e);
       });
   });
+
+  router.post("/shoes/:product_id", (req, res) => {
+    const productId = req.params.product_id
+    const userid = req.body.userId
+    const productPrice = req.body.productPrice
+    // get the order_id
+
+    // const orderId = res.data.orderId;
+
+    if (!userid) {
+      res.send("💩");
+      return;
+    }
+    // only creates a new order when an order doesn't exist 
+    getMostRecentOrderFromUser()
+      .then((res) => {
+        // console.log('res175:', res);
+        const orderIdFromRecentOrder = res[0].id;
+
+        if (orderIdFromRecentOrder) {
+          // console.log('CorrectIdPerhapsss:', orderIdFromRecentOrder);
+          appendOrdersItemsTableWithCurrentOrder(productId, orderIdFromRecentOrder, productPrice)
+            .then(res => console.log(res))
+            .catch((err) => {
+              res.json(err)
+            })
+        }
+        else {
+          createOrdersTableWithUserId(userid)
+            .then((res) => {
+              console.log(userid);
+              // console.log('resdata:', res);
+              const orderId = res.id;
+              // console.log("productId:", productId);
+              // console.log("orderId:", orderId);
+              // console.log("productTotal:", productPrice);
+              appendOrdersItemsTableWithCurrentOrder(productId, orderId, productPrice)
+                .then(res => console.log(res))
+                .catch((err) => {
+                  res.json(err)
+                })
+              console.log(res);
+            })
+            .catch((err) => {
+              res.json(err)
+            })
+        }
+        console.log(res)
+      })
+      .catch((err) => {
+        res.json(err)
+      })
+  });
+
 
   // get the specific shoe item
   router.get("/shoes/:product_id", (req, res) => {
@@ -220,6 +327,59 @@ module.exports = function (router, database) {
         res.json(err)
       })
   });
+  router.post("/bags/:product_id", (req, res) => {
+    const productId = req.params.product_id
+    const userid = req.body.userId
+    const productPrice = req.body.productPrice
+    // get the order_id
+
+    // const orderId = res.data.orderId;
+
+    if (!userid) {
+      res.send("💩");
+      return;
+    }
+    // only creates a new order when an order doesn't exist 
+    getMostRecentOrderFromUser()
+      .then((res) => {
+        // console.log('res175:', res);
+        const orderIdFromRecentOrder = res[0].id;
+
+        if (orderIdFromRecentOrder) {
+          // console.log('CorrectIdPerhapsss:', orderIdFromRecentOrder);
+          appendOrdersItemsTableWithCurrentOrder(productId, orderIdFromRecentOrder, productPrice)
+            .then(res => console.log(res))
+            .catch((err) => {
+              res.json(err)
+            })
+        }
+        else {
+          createOrdersTableWithUserId(userid)
+            .then((res) => {
+              console.log(userid);
+              // console.log('resdata:', res);
+              const orderId = res.id;
+              // console.log("productId:", productId);
+              // console.log("orderId:", orderId);
+              // console.log("productTotal:", productPrice);
+              appendOrdersItemsTableWithCurrentOrder(productId, orderId, productPrice)
+                .then(res => console.log(res))
+                .catch((err) => {
+                  res.json(err)
+                })
+              console.log(res);
+            })
+            .catch((err) => {
+              res.json(err)
+            })
+        }
+        console.log(res)
+      })
+      .catch((err) => {
+        res.json(err)
+      })
+  });
+
 
 
   // get checkoutpage/ summary page logged in only
